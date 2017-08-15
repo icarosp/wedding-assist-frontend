@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Novo Usuário
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+
+        <ion-item>
+            <ion-label floating>Nome</ion-label>
+            <ion-input [(ngModel)]="registrationUser.name" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input [(ngModel)]="registrationUser.email" type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Senha</ion-label>
+            <ion-input [(ngModel)]="registrationUser.password" type="password"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <button ion-button block outline large (click)="onRegister()">Cadastrar</button>
+        </ion-item>
+
+    </ion-list>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col width-50>
+                <button ion-button clear small (click)="navToResendCode()">Reenviar Código</button>
+            </ion-col>
+            <ion-col width-50>
+                <button ion-button clear small (click)="navToLogin()">Login</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
