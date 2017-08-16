@@ -1,9 +1,9 @@
 {
   "name": "WeddingAssist",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
+  "author": "Icaro Fernandez Guselian",
+  "homepage": "https://github.com/icarosp/wedding-assist-frontend",
+  "private": false,
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",

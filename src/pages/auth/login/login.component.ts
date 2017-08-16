@@ -3,9 +3,10 @@ import {CognitoCallback, LoggedInCallback} from "../../../providers/cognito.serv
 import {AlertController, NavController, NavParams} from "ionic-angular";
 import {UserLoginService} from "../../../providers/userLogin.service";
 import {EventsService} from "../../../providers/events.service";
-import {ControlPanelComponent} from "../controlpanel/controlpanel";
+import {TabsPage} from "../../tabs/tabs";
 import {RegisterComponent} from "../register/register.component";
 import {ForgotPasswordStep1Component} from "../forgotpassword/forgotPassword1.component";
+
 @Component({
     templateUrl: 'login.html'
 })
@@ -30,7 +31,7 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback {
     }
 
     signMeIn() {
-        console.log("in onLogin");
+        console.log("in onLogin - IT IS WORKING!!!");
         if (this.email == null || this.password == null) {
             this.doAlert("Error", "All fields are required");
             return;
@@ -44,7 +45,7 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback {
             console.log("result: " + message);
         } else { //success
             console.log("Redirect to ControlPanelComponent");
-            this.nav.setRoot(ControlPanelComponent);
+            this.nav.setRoot(TabsPage);
         }
     }
 
@@ -52,7 +53,7 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback {
         console.log("The user is logged in: " + isLoggedIn);
         if (isLoggedIn) {
             this.eventService.sendLoggedInEvent();
-            this.nav.setRoot(ControlPanelComponent);
+            this.nav.setRoot(TabsPage);
         }
     }
 
