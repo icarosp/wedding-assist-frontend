@@ -5,12 +5,25 @@
 </ion-header>
 
 <ion-content padding>
+
+    
+
   <ion-card>
     <ion-card-header>
-      Novo lance! <ion-icon name="ion-android-notifications"></ion-icon>
+      <ion-grid>
+        <ion-row>
+            <ion-col col-2><ion-icon name="heart"></ion-icon> </ion-col>
+            <ion-col col-10>Novo lance!</ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-header>
     <ion-card-content>
       A empresa X fez um lance de R$ 5.000 em tudo que você precisa!
     </ion-card-content>
+  
+    <ion-item>
+        <button ion-button full>Pedir Orçamento</button>
+        </ion-item>
   </ion-card>
+  
 </ion-content>
