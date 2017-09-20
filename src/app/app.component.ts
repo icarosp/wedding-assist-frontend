@@ -6,6 +6,7 @@ import { AwsUtil } from "../providers/aws.service";
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginComponent } from '../pages/auth/login/login.component';
 import { LogoutComponent } from "../pages/auth/logout/logout.component";
+import { RegisterComponent } from "../pages/auth/register/register.component"
 
 @Component({
   templateUrl: 'app.html'

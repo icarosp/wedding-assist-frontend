@@ -13,6 +13,7 @@ import {EventsService} from "../providers/events.service";
 import {LoginComponent} from "../pages/auth/login/login.component";
 import {ForgotPasswordStep1Component} from "../pages/auth/forgotpassword/forgotPassword1.component";
 import {ForgotPasswordStep2Component} from "../pages/auth/forgotpasswordstep2/forgotPassword2.component";
+import { RegisterComponent } from "../pages/auth/register/register.component"
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -28,7 +29,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabsPage,
     ForgotPasswordStep1Component,
     ForgotPasswordStep2Component,
-
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +44,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     TabsPage,
     ForgotPasswordStep1Component,
-    ForgotPasswordStep2Component
+    ForgotPasswordStep2Component,
+    RegisterComponent
   ],
   providers: [
     CognitoUtil,

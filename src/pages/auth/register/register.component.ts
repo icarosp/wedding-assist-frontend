@@ -11,7 +11,6 @@ import {LoginComponent} from "../login/login.component";
  * the registration of the user.
  */
 @Component({
-
     templateUrl: 'register.html',
     providers: [UserRegistrationService]
 })
