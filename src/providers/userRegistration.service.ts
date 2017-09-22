@@ -10,6 +10,8 @@ export class UserRegistrationService {
     }
 
     register(user: RegistrationUser, callback: CognitoCallback): void {
+        
+        //calls amazon
         console.log("user: " + user);
 
         let attributeList = [];
@@ -33,6 +35,8 @@ export class UserRegistrationService {
                 callback.cognitoCallback(null, result);
             }
         });
+
+        //calls our api
 
     }
 
