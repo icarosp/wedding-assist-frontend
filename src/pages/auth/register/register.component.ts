@@ -5,6 +5,7 @@ import {AlertController, NavController} from "ionic-angular";
 import {ConfirmRegistrationComponent} from "../confirmregistration/confirmRegistration.component";
 import {ResendCodeComponent} from "../resendcode/resendCode.component";
 import {LoginComponent} from "../login/login.component";
+import { LoadingController } from 'ionic-angular';
 
 /**
  * This component is responsible for displaying and controlling
@@ -16,11 +17,17 @@ import {LoginComponent} from "../login/login.component";
 })
 export class RegisterComponent implements CognitoCallback {
     registrationUser: RegistrationUser;
+    loader: any;
 
     constructor(public nav: NavController,
                 public userRegistration: UserRegistrationService,
                 public alertCtrl: AlertController) {
         this.registrationUser = new RegistrationUser();
+
+        /*this.loader = this.loader.create({
+            spinner: 'hide',
+            content: 'Por favor aguarde'
+          });*/
     }
 
     ionViewLoaded() {
@@ -28,6 +35,7 @@ export class RegisterComponent implements CognitoCallback {
     }
 
     onRegister() {
+        //this.loader.present();
         this.userRegistration.register(this.registrationUser, this);
     }
 
@@ -38,11 +46,21 @@ export class RegisterComponent implements CognitoCallback {
      * registration
      *
      */
-    cognitoCallback(message: string, result: any) {
-        if (message != null) { //error
-            this.doAlert("Registration", message);
+    cognitoCallback(awsMessage: string, result: any) {
+        let msg: string;         
+        
+        if (awsMessage != null) { //error
+
+            //translate errors to portuguese
+            msg = "Problema ao efetuar cadastro.";
+
+            this.doAlert("Erro", msg);
         } else { //success
-            console.log("in callback...result: " + result);
+            msg = "Cadastro efetuado com sucesso";
+
+            this.doAlert("Cadastro", msg);
+
+            //console.log("in callback...result: " + result);
             this.nav.push(ConfirmRegistrationComponent, {
                 'username': result.user.username,
                 'email': this.registrationUser.email
