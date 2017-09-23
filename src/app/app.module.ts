@@ -15,6 +15,7 @@ import { ForgotPasswordStep1Component } from "../pages/auth/forgotpassword/forgo
 import { ForgotPasswordStep2Component } from "../pages/auth/forgotpasswordstep2/forgotPassword2.component";
 import { RegisterComponent } from "../pages/auth/register/register.component"
 import { ConfirmRegistrationComponent } from "../pages/auth/confirmregistration/confirmRegistration.component"
+import { HttpModule } from '@angular/http';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -34,7 +35,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

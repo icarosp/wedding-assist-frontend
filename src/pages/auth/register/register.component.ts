@@ -9,6 +9,7 @@ import { LoadingController } from 'ionic-angular';
 import { Fiance } from "../../../models/fiance.model"
 import { Provider } from "../../../models/provider.model"
 import { WAService } from "../../../providers/wa.service"
+import { Http, Headers, RequestOptions} from '@angular/http';
 
 /**
  * This component is responsible for displaying and controlling
@@ -29,7 +30,8 @@ export class RegisterComponent implements CognitoCallback {
     constructor(public nav: NavController,
         public userRegistration: UserRegistrationService,
         public alertCtrl: AlertController,
-        public loadingController: LoadingController) {
+        public loadingController: LoadingController,
+        public http: Http) {
         this.registrationUser = new RegistrationUser();
         this.fiance = new Fiance();
         this.provider = new Provider();
@@ -57,8 +59,10 @@ export class RegisterComponent implements CognitoCallback {
         });
         this.loader.present();
 
+        this.cognitoCallback(null,null);
+
         //CALL REGISTRATION SERVICES
-        this.userRegistration.register(this.registrationUser, this);
+        //this.userRegistration.register(this.registrationUser, this);
     }
 
 
@@ -88,12 +92,24 @@ export class RegisterComponent implements CognitoCallback {
 
             //FIANCE
             if (this.userType == "fiance") {
-                this.waService.RegisterFiance(this.fiance);
+                
+                let url = 'http://localhost:56934/api/user/save_fiance'
+                let body = JSON.stringify(this.fiance);
+                let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options = new RequestOptions({ headers: headers });
+                
+                return this.http.post(url, body, options)
+                                .map(res =>  res.json().data)
+                                .subscribe(data=> {
+                                    console.log(data);
+                            });
+                
+                //this.waService.RegisterFiance(this.fiance);
                 //PROVIDER
             } else {
 
 
-            }
+            }/*
 
             
 
@@ -107,7 +123,7 @@ export class RegisterComponent implements CognitoCallback {
             this.nav.push(ConfirmRegistrationComponent, {
                 'username': result.user.username,
                 'email': this.registrationUser.email
-            });
+            });*/
         }
     }
 
