@@ -16,6 +16,8 @@ import { ForgotPasswordStep2Component } from "../pages/auth/forgotpasswordstep2/
 import { RegisterComponent } from "../pages/auth/register/register.component"
 import { ConfirmRegistrationComponent } from "../pages/auth/confirmregistration/confirmRegistration.component"
 import { HttpModule } from '@angular/http';
+import { BudgetPage } from '../pages/budget/budget';
+import { SearchPage } from '../pages/search/search';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,7 +33,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ForgotPasswordStep1Component,
     ForgotPasswordStep2Component,
     RegisterComponent,
-    ConfirmRegistrationComponent
+    ConfirmRegistrationComponent,
+    BudgetPage,
+    SearchPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ForgotPasswordStep1Component,
     ForgotPasswordStep2Component,
     RegisterComponent,
-    ConfirmRegistrationComponent
+    ConfirmRegistrationComponent,
+    BudgetPage,
+    SearchPage
   ],
   providers: [
     CognitoUtil,
