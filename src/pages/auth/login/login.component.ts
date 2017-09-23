@@ -1,11 +1,12 @@
-import {Component} from "@angular/core";
-import {CognitoCallback, LoggedInCallback} from "../../../providers/cognito.service";
-import {AlertController, NavController, NavParams} from "ionic-angular";
-import {UserLoginService} from "../../../providers/userLogin.service";
-import {EventsService} from "../../../providers/events.service";
-import {TabsPage} from "../../tabs/tabs";
-import {RegisterComponent} from "../register/register.component";
-import {ForgotPasswordStep1Component} from "../forgotpassword/forgotPassword1.component";
+import { Component } from "@angular/core";
+import { CognitoCallback, LoggedInCallback } from "../../../providers/cognito.service";
+import { AlertController, NavController, NavParams } from "ionic-angular";
+import { UserLoginService } from "../../../providers/userLogin.service";
+import { EventsService } from "../../../providers/events.service";
+import { TabsPage } from "../../tabs/tabs";
+import { RegisterComponent } from "../register/register.component";
+import { ForgotPasswordStep1Component } from "../forgotpassword/forgotPassword1.component";
+import { WAService } from "../../../providers/wa.service"
 
 @Component({
     templateUrl: 'login.html'
@@ -13,12 +14,15 @@ import {ForgotPasswordStep1Component} from "../forgotpassword/forgotPassword1.co
 export class LoginComponent implements CognitoCallback, LoggedInCallback {
     email: string;
     password: string;
+    waService: WAService;
 
     constructor(public nav: NavController,
-                public navParam: NavParams,
-                public alertCtrl: AlertController,
-                public userService: UserLoginService,
-                public eventService: EventsService) {
+        public navParam: NavParams,
+        public alertCtrl: AlertController,
+        public userService: UserLoginService,
+        public eventService: EventsService) {
+        this.waService = new WAService();
+
         console.log("LoginComponent constructor");
         if (navParam != null && navParam.get("email") != null)
             this.email = navParam.get("email");
@@ -36,6 +40,9 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback {
             this.doAlert("Error", "All fields are required");
             return;
         }
+
+        this.waService.SaveIntoDbWithKey('email',this.email);
+
         this.userService.authenticate(this.email, this.password, this);
     }
 

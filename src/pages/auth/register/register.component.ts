@@ -59,8 +59,6 @@ export class RegisterComponent implements CognitoCallback {
         });
         this.loader.present();
 
-        this.cognitoCallback(null,null);
-
         //CALL REGISTRATION SERVICES
         this.userRegistration.register(this.registrationUser, this);
     }
@@ -104,7 +102,7 @@ export class RegisterComponent implements CognitoCallback {
                     this.doAlert("Erro",error.json().errors[0]);
                 });
             } else {
-                let url = this.waService.GetServiceUrl()+'/save_provider'
+                let url = this.waService.GetServiceUrl()+'/user/save_provider'
                 let body = JSON.stringify(this.provider);
                 let headers = new Headers({ 'Content-Type': 'application/json' });
                 let options = new RequestOptions({ headers: headers });

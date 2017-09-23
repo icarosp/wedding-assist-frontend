@@ -33,6 +33,7 @@ export class UserLoginService {
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function (result) {
                 callback.cognitoCallback(null, result);
+
                 mythis.eventService.sendLoggedInEvent();
             },
             onFailure: function (err) {
