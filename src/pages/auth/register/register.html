@@ -23,32 +23,67 @@
         </ion-segment>
     </ion-toolbar>
 
+    <!--nickname: string;
+    email: string;
+    phone: string;
+    name: string;
+    birth: string;
+    gender: string;-->
+
     <div *ngIf="userType == 'fiance'">
 
         <ion-list>
             <ion-item>
                 <ion-label floating>Nome do Noivo(a)</ion-label>
-                <ion-input [(ngModel)]="registrationUser.name" type="text"></ion-input>
+                <ion-input [(ngModel)]="fiance.name" type="text"></ion-input>
             </ion-item>
-            
+
             <ion-item>
-                <ion-label floating>Apelido</ion-label>
-                <ion-input [(ngModel)]="registrationUser.name" type="text"></ion-input>
+                <ion-label floating>Apelido do Casal</ion-label>
+                <ion-input [(ngModel)]="fiance.nickname" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Data de Nascimento</ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="fiance.birth"></ion-datetime>
             </ion-item>
 
             <ion-item>
                 <ion-label floating>Telefone</ion-label>
-                <ion-input [(ngModel)]="registrationUser.name" type="phone"></ion-input>
+                <ion-input [(ngModel)]="fiance.phone" type="phone"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label floating>Data Nascimento</ion-label>
-                <ion-input [(ngModel)]="registrationUser.name" type="date"></ion-input>
+                <ion-label floating>Sexo</ion-label>
+                <ion-select [(ngModel)]="fiance.gender">
+                    <ion-option value="female">Feminino</ion-option>
+                    <ion-option value="male">Masculino</ion-option>
+                </ion-select>
             </ion-item>
+
+
         </ion-list>
     </div>
-    <div *ngIf="userType == provider">
-        SÓ MOSTRA QUANTO PROVIDER
+    <div *ngIf="userType == 'provider'">
+        <ion-item>
+            <ion-label floating>Nome da Empresa</ion-label>
+            <ion-input [(ngModel)]="provider.name" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Telefone</ion-label>
+            <ion-input [(ngModel)]="provider.phone" type="phone"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Serviços Oferecidos</ion-label>
+            <ion-select [(ngModel)]="provider.services" multiple="true">
+                <ion-option>Fotógrafo</ion-option>
+                <ion-option>Buffet</ion-option>
+                <ion-option>Locação de Espaço</ion-option>
+                <ion-option>Decoração</ion-option>
+            </ion-select>
+        </ion-item>
     </div>
 
     <ion-list>

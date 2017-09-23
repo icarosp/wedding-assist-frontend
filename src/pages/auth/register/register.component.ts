@@ -46,8 +46,16 @@ export class RegisterComponent implements CognitoCallback {
     }
 
     onRegister() {
-        //this.loader.present();
-        this.userRegistration.register(this.registrationUser, this);
+
+
+    //fiance
+    if(this.userType == "fiance")
+        this.fiance.email = this.registrationUser.email;
+    else
+        this.provider.email = this.registrationUser.email;
+
+    this.loader.present();
+        //this.userRegistration.register(this.registrationUser, this);
     }
 
     /**
