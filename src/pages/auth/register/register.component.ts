@@ -62,7 +62,7 @@ export class RegisterComponent implements CognitoCallback {
         this.cognitoCallback(null,null);
 
         //CALL REGISTRATION SERVICES
-        //this.userRegistration.register(this.registrationUser, this);
+        this.userRegistration.register(this.registrationUser, this);
     }
 
 
@@ -93,37 +93,33 @@ export class RegisterComponent implements CognitoCallback {
             //FIANCE
             if (this.userType == "fiance") {
                 
-                let url = 'http://localhost:56934/api/user/save_fiance'
+                let url = this.waService.GetServiceUrl()+'/user/save_fiance'
                 let body = JSON.stringify(this.fiance);
                 let headers = new Headers({ 'Content-Type': 'application/json' });
                 let options = new RequestOptions({ headers: headers });
                 
-                return this.http.post(url, body, options).subscribe(data => {
+                this.http.post(url, body, options).subscribe(data => {
                         this.doAlert("Aviso","Cadastro efetuado com sucesso!");
                 }, error => {
                     this.doAlert("Erro",error.json().errors[0]);
                 });
-                
-                //this.waService.RegisterFiance(this.fiance);
-                //PROVIDER
             } else {
+                let url = this.waService.GetServiceUrl()+'/save_provider'
+                let body = JSON.stringify(this.provider);
+                let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options = new RequestOptions({ headers: headers });
+                
+                this.http.post(url, body, options).subscribe(data => {
+                        this.doAlert("Aviso","Cadastro efetuado com sucesso!");
+                }, error => {
+                    this.doAlert("Erro",error.json().errors[0]);
+                });
+            }
 
-
-            }/*
-
-            
-
-
-
-            msg = "Cadastro efetuado com sucesso";
-
-            this.doAlert("Cadastro", msg);
-
-            //console.log("in callback...result: " + result);
             this.nav.push(ConfirmRegistrationComponent, {
                 'username': result.user.username,
                 'email': this.registrationUser.email
-            });*/
+            });
         }
     }
 

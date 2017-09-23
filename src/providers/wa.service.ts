@@ -7,19 +7,13 @@ import 'rxjs/add/operator/map'
 export class WAService{
 
     headers: Headers;
-    http: Http;
+    private url: string;
 
     constructor(){
-        this.headers = new Headers();
-        this.headers.append('Content-Type','application/json');
+        this.url = "http://localhost:56934/api/";
     }
 
-    RegisterFiance(fiance: Fiance){
-
-        this.http.post('', JSON.stringify(fiance), {headers: this.headers})
-            .map(res => res.json())
-            .subscribe(data=> {
-                console.log(data);
-        });
+    GetServiceUrl(){
+        return this.url;
     }
 }
