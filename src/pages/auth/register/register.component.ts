@@ -98,11 +98,11 @@ export class RegisterComponent implements CognitoCallback {
                 let headers = new Headers({ 'Content-Type': 'application/json' });
                 let options = new RequestOptions({ headers: headers });
                 
-                return this.http.post(url, body, options)
-                                .map(res =>  res.json().data)
-                                .subscribe(data=> {
-                                    console.log(data);
-                            });
+                return this.http.post(url, body, options).subscribe(data => {
+                        this.doAlert("Aviso","Cadastro efetuado com sucesso!");
+                }, error => {
+                    this.doAlert("Erro",error.json().errors[0]);
+                });
                 
                 //this.waService.RegisterFiance(this.fiance);
                 //PROVIDER
