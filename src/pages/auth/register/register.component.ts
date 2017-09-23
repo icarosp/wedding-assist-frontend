@@ -8,6 +8,7 @@ import { LoginComponent } from "../login/login.component";
 import { LoadingController } from 'ionic-angular';
 import { Fiance } from "../../../models/fiance.model"
 import { Provider } from "../../../models/provider.model"
+import { WAService } from "../../../providers/wa.service"
 
 /**
  * This component is responsible for displaying and controlling
@@ -23,6 +24,7 @@ export class RegisterComponent implements CognitoCallback {
     fiance: Fiance;
     userType: string;
     loader: any;
+    waService: WAService;
 
     constructor(public nav: NavController,
         public userRegistration: UserRegistrationService,
@@ -31,7 +33,9 @@ export class RegisterComponent implements CognitoCallback {
         this.registrationUser = new RegistrationUser();
         this.fiance = new Fiance();
         this.provider = new Provider();
+        this.waService = new WAService();
 
+        //set default value
         this.userType = "fiance";
     }
 
@@ -57,6 +61,12 @@ export class RegisterComponent implements CognitoCallback {
         this.userRegistration.register(this.registrationUser, this);
     }
 
+
+    waCallback(waMessage: string, result: any){
+
+    }
+
+
     /**
      * CAllback on the user clicking 'register'
      *
@@ -78,8 +88,7 @@ export class RegisterComponent implements CognitoCallback {
 
             //FIANCE
             if (this.userType == "fiance") {
-
-
+                this.waService.RegisterFiance(this.fiance);
                 //PROVIDER
             } else {
 
