@@ -9,31 +9,54 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
-    <ion-list>
 
-        <ion-item>
-            <ion-label floating>Nome</ion-label>
-            <ion-input [(ngModel)]="registrationUser.name" type="text"></ion-input>
-        </ion-item>
+<ion-content>
+
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="userType" color="primary">
+            <ion-segment-button value="fiance" checked>
+                Noivo
+            </ion-segment-button>
+            <ion-segment-button value="provider">
+                Fornecedor
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+    <div *ngIf="userType == 'fiance'">
+
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Nome do Noivo(a)</ion-label>
+                <ion-input [(ngModel)]="registrationUser.name" type="text"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label floating>Apelido</ion-label>
+                <ion-input [(ngModel)]="registrationUser.name" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Telefone</ion-label>
+                <ion-input [(ngModel)]="registrationUser.name" type="phone"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Data Nascimento</ion-label>
+                <ion-input [(ngModel)]="registrationUser.name" type="date"></ion-input>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div *ngIf="userType == provider">
+        SÓ MOSTRA QUANTO PROVIDER
+    </div>
+
+    <ion-list>
 
         <ion-item>
             <ion-label floating>Email</ion-label>
             <ion-input [(ngModel)]="registrationUser.email" type="email"></ion-input>
         </ion-item>
-
-        <ion-label>Tipo de Usuário</ion-label>
-        <ion-toggle (ionChange)="isDisabled = !isDisabled"></ion-toggle>
-
-        <!--<ion-item>
-            <ion-label floating>Telefone</ion-label>
-            <ion-input [(ngModel)]="registrationUser.name" type="text"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label floating>Data Nascimento</ion-label>
-            <ion-input [(ngModel)]="registrationUser.name" type="text"></ion-input>
-        </ion-item>-->
 
         <ion-item>
             <ion-label floating>Senha</ion-label>
@@ -43,8 +66,8 @@
         <ion-item>
             <button ion-button block outline large (click)="onRegister()">Cadastrar</button>
         </ion-item>
-
     </ion-list>
+
 
     <ion-grid>
         <ion-row>

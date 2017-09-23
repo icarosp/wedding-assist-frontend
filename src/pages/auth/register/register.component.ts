@@ -6,6 +6,8 @@ import {ConfirmRegistrationComponent} from "../confirmregistration/confirmRegist
 import {ResendCodeComponent} from "../resendcode/resendCode.component";
 import {LoginComponent} from "../login/login.component";
 import { LoadingController } from 'ionic-angular';
+import { Fiance } from "../../../models/fiance.model"
+import { Provider } from "../../../models/provider.model"
 
 /**
  * This component is responsible for displaying and controlling
@@ -17,12 +19,21 @@ import { LoadingController } from 'ionic-angular';
 })
 export class RegisterComponent implements CognitoCallback {
     registrationUser: RegistrationUser;
+    provider: Provider;
+    fiance: Fiance;
+    userType: string;
+
+
     loader: any;
 
     constructor(public nav: NavController,
                 public userRegistration: UserRegistrationService,
                 public alertCtrl: AlertController) {
         this.registrationUser = new RegistrationUser();
+        this.fiance = new Fiance();
+        this.provider = new Provider();
+
+        this.userType = "fiance";
 
         /*this.loader = this.loader.create({
             spinner: 'hide',
@@ -56,6 +67,21 @@ export class RegisterComponent implements CognitoCallback {
 
             this.doAlert("Erro", msg);
         } else { //success
+
+            //FIANCE
+            if(this.userType == "fiance"){
+
+
+            //PROVIDER
+            }else{
+
+
+            }
+
+
+
+
+
             msg = "Cadastro efetuado com sucesso";
 
             this.doAlert("Cadastro", msg);

@@ -10,6 +10,23 @@ export class RegistrationUser {
     password: string;
 }
 
+export class Provider {
+    email: string;
+    phone: string;
+    password: string;
+    providerName: string;
+    logo: string;
+}
+
+export class Fiance {
+    nickname: string;
+    email: string;
+    phone: string;
+    name: string;
+    birth: string;
+    gender: string;
+}
+
 export interface CognitoCallback {
     cognitoCallback(message: string, result: any): void;
 }
