@@ -1,10 +1,10 @@
-import {Component} from "@angular/core";
-import {UserRegistrationService} from "../../../providers/userRegistration.service";
-import {CognitoCallback, RegistrationUser} from "../../../providers/cognito.service";
-import {AlertController, NavController} from "ionic-angular";
-import {ConfirmRegistrationComponent} from "../confirmregistration/confirmRegistration.component";
-import {ResendCodeComponent} from "../resendcode/resendCode.component";
-import {LoginComponent} from "../login/login.component";
+import { Component } from "@angular/core";
+import { UserRegistrationService } from "../../../providers/userRegistration.service";
+import { CognitoCallback, RegistrationUser } from "../../../providers/cognito.service";
+import { AlertController, NavController } from "ionic-angular";
+import { ConfirmRegistrationComponent } from "../confirmregistration/confirmRegistration.component";
+import { ResendCodeComponent } from "../resendcode/resendCode.component";
+import { LoginComponent } from "../login/login.component";
 import { LoadingController } from 'ionic-angular';
 import { Fiance } from "../../../models/fiance.model"
 import { Provider } from "../../../models/provider.model"
@@ -22,23 +22,17 @@ export class RegisterComponent implements CognitoCallback {
     provider: Provider;
     fiance: Fiance;
     userType: string;
-
-
     loader: any;
 
     constructor(public nav: NavController,
-                public userRegistration: UserRegistrationService,
-                public alertCtrl: AlertController) {
+        public userRegistration: UserRegistrationService,
+        public alertCtrl: AlertController,
+        public loadingController: LoadingController) {
         this.registrationUser = new RegistrationUser();
         this.fiance = new Fiance();
         this.provider = new Provider();
 
         this.userType = "fiance";
-
-        /*this.loader = this.loader.create({
-            spinner: 'hide',
-            content: 'Por favor aguarde'
-          });*/
     }
 
     ionViewLoaded() {
@@ -48,14 +42,19 @@ export class RegisterComponent implements CognitoCallback {
     onRegister() {
 
 
-    //fiance
-    if(this.userType == "fiance")
-        this.fiance.email = this.registrationUser.email;
-    else
-        this.provider.email = this.registrationUser.email;
+        //fiance
+        if (this.userType == "fiance")
+            this.fiance.email = this.registrationUser.email;
+        else
+            this.provider.email = this.registrationUser.email;
 
-    this.loader.present();
-        //this.userRegistration.register(this.registrationUser, this);
+        this.loader = this.loadingController.create({
+            content: "Salvando..."
+        });
+        this.loader.present();
+
+        //CALL REGISTRATION SERVICES
+        this.userRegistration.register(this.registrationUser, this);
     }
 
     /**
@@ -66,8 +65,9 @@ export class RegisterComponent implements CognitoCallback {
      *
      */
     cognitoCallback(awsMessage: string, result: any) {
-        let msg: string;         
-        
+        let msg: string;
+        this.loader.dismiss();
+
         if (awsMessage != null) { //error
 
             //translate errors to portuguese
@@ -77,16 +77,16 @@ export class RegisterComponent implements CognitoCallback {
         } else { //success
 
             //FIANCE
-            if(this.userType == "fiance"){
+            if (this.userType == "fiance") {
 
 
-            //PROVIDER
-            }else{
+                //PROVIDER
+            } else {
 
 
             }
 
-
+            
 
 
 
