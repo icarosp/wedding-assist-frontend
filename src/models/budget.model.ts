@@ -4,7 +4,11 @@ export class Budget {
     coupleId: number;
     startDate: any;
     duration: any;
-    services: BudgetService[];
+    services: Array<BudgetService>;
+
+    constructor() {
+        this.services = new Array<BudgetService>();
+    }
 
     AddService(service: BudgetService){
         this.services.push(service)
@@ -14,6 +18,7 @@ export class Budget {
 export class BudgetService {
     categories: BudgetServiceCategory[];
     serviceType: number;
+    serviceName: string;
 
     AddCategory(category: BudgetServiceCategory){
         this.categories.push(category)

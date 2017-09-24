@@ -10,14 +10,14 @@
   <ion-item-group>
     <ion-item-divider color="light">Buffet</ion-item-divider>
     <button ion-item>
-        <ion-icon name="leaf" item-start color="primary"></ion-icon>
+        <ion-icon name="pizza" item-start color="primary"></ion-icon>
         <ion-label>Comidas</ion-label>
         <ion-icon name ="arrow-forward" item-end></ion-icon>
       </button>
     <button ion-item>
         Bebidas
           <ion-icon name="arrow-forward" item-end></ion-icon>
-          <ion-icon name="leaf" item-left></ion-icon>
+          <ion-icon name="pizza" item-left></ion-icon>
             <h3 style="padding-left: 1%; padding-top: 1%;"> - Refrigerante 10 Pessoas</h3> 
             <h3 style="padding-left: 1%;"> - Cerveja 20 Pessoas</h3>
             <h3 style="padding-left: 1%;"> - Suco 30 Pessoas</h3>
@@ -30,5 +30,15 @@
     <ion-item>Cortinas</ion-item>
     <ion-item>Convites</ion-item>
   </ion-item-group>
+
+
+
+
+  <div *ngFor="let service of pageBudget.services; trackBy index;">
+    <ion-item-group>
+      <ion-item-divider color="light">{{service.serviceName}}</ion-item-divider>
+    </ion-item-group>
+  </div>
+
 
 </ion-content>
