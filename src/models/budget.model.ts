@@ -16,22 +16,39 @@ export class Budget {
 }
 
 export class BudgetService {
-    categories: BudgetServiceCategory[];
+    categories: Array<BudgetServiceCategory>;
     serviceType: number;
     serviceName: string;
+    isSelected: boolean;
 
     AddCategory(category: BudgetServiceCategory){
         this.categories.push(category)
     }
+
+    constructor() {
+        this.categories = new Array<BudgetServiceCategory>();
+    }
 }
 
 export class BudgetServiceCategory {
-    items: BudgetCategoryItem[];
+    items: Array<BudgetCategoryItem>;
     category: number;
     description: string;
+    categoryName: string;
+    categoryIcon: string;
 
     AddItems(items: BudgetCategoryItem){
         this.items.push(items)
+    }
+
+    constructor() {
+        this.items = new Array<BudgetCategoryItem>()
+    }
+
+    GetRightIcon(){
+        if(this.items.length < 1)
+          return "md-add";
+        return "md-create";
     }
 }
 
@@ -40,5 +57,10 @@ export class BudgetCategoryItem {
     description: string;
     peopleQuantity: number;
     type: number;
+    selected: boolean;
+
+    constructor() {
+        this.selected = false;
+    }
 }
 
