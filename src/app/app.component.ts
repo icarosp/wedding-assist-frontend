@@ -9,6 +9,7 @@ import { LogoutComponent } from "../pages/auth/logout/logout.component";
 import { RegisterComponent } from "../pages/auth/register/register.component"
 import { SearchPage } from "../pages/search/search"
 import { ProfilePage } from "../pages/profile/profile"
+import { BudgetPage } from "../pages/budget/budget"
 
 
 @Component({
@@ -37,7 +38,7 @@ export class MyApp {
       this.awsUtil.initAwsService();
   
       console.log("Set login component as root");
-      this.rootPage = ProfilePage;
+      this.rootPage = BudgetPage;
   
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
