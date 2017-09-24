@@ -12,16 +12,17 @@ export class ProfilePage {
   waService: WAService;
   userType: any;
   provider: any;
-  fiance: Fiance;
+  fiance: any;
   editingEnable: boolean;
 
   constructor(public navCtrl: NavController,
     public http: Http,
     public alertCtrl: AlertController) {
     this.waService = new WAService();
-    this.fiance = new Fiance();
     this.editingEnable = true;
     console.log(this.fiance);
+
+    this.fiance = {name: ""};
 
     this.userType = this.waService.GetFromDbWithKey("userType");
 
@@ -60,7 +61,16 @@ export class ProfilePage {
   updateFiance(){
     this.editingEnable = true;
 
-    //call http update here
+    let url = this.waService.GetServiceUrl()+'/user/fiance/'+this.fiance.fianceId;
+    let body = JSON.stringify(this.fiance);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    
+    this.http.put(url, body, options).subscribe(data => {
+            this.doAlert("Aviso","Dados salvos com sucesso!");
+    }, error => {
+        this.doAlert("Erro",error.json().errors[0]);
+    });
   }
 
   isEditingEnable(){
