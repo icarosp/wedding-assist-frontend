@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { AlertController, NavController } from 'ionic-angular';
 import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Fiance } from '../../models/fiance.model';
 
 @Component({
   selector: 'page-profile',
@@ -10,20 +11,69 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 export class ProfilePage {
   waService: WAService;
   userType: any;
+  provider: any;
+  fiance: Fiance;
+  editingEnable: boolean;
 
   constructor(public navCtrl: NavController,
-    public http: Http) {
+    public http: Http,
+    public alertCtrl: AlertController) {
     this.waService = new WAService();
+    this.fiance = new Fiance();
+    this.editingEnable = true;
+    console.log(this.fiance);
 
     this.userType = this.waService.GetFromDbWithKey("userType");
 
-    if(this.userType == 0){
+    let id = this.waService.GetFromDbWithKey("id");
 
+    if(this.userType == 0){
+      let url = this.waService.GetServiceUrl() + '/user/fiance/'+id;
+      this.http.get(url).subscribe(data => {
+        console.log(data.json().data);
+        this.fiance = data.json().data;
+        console.log(this.fiance);
+        //console.log(this.fianceitems);
+      }, error => {
+        this.doAlert("Erro", error.json().errors[0]);
+      });
     }else{
+      let url = this.waService.GetServiceUrl() + '/user/provider/'+id;
+      this.http.get(url).subscribe(data => {
+        console.log(data);
+        //this.fianceitems = this.fiances = data.json().data.fiances;
+        //console.log(this.fianceitems);
+      }, error => {
+        this.doAlert("Erro", error.json().errors[0]);
+      });
       
     }
 
 
+  }
+
+  enableEdit(){
+    console.log(this.editingEnable);
+    this.editingEnable = false;
+  }
+
+  updateFiance(){
+    this.editingEnable = true;
+
+    //call http update here
+  }
+
+  isEditingEnable(){
+    return this.editingEnable;
+  }
+
+  doAlert(title: string, message: string) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

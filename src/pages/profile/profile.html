@@ -7,11 +7,40 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="../assets/image/profile.jpg">
-    </ion-avatar>
-    <h2>Ícaro Fernandez Guselian</h2>
-    <p>16 de Junho de 1993</p>
-  </ion-item>
+
+  <ion-avatar item-start>
+    <img style="display: block;
+                margin: 0 auto;
+                margin-bottom:5%;"
+                src="https://static.tplugin.com/tplugin/img/unknown-user.png">
+  </ion-avatar>
+
+
+    <ion-list>
+        <ion-item>
+            <ion-label floating>Nome do Noivo(a)</ion-label>
+            <ion-input [(ngModel)]="fiance.name" type="text" [disabled]="isEditingEnable()"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Apelido do Casal</ion-label>
+            <ion-input  [(ngModel)]="fiance.nickname" type="text" [disabled]="isEditingEnable()"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Telefone</ion-label>
+            <ion-input  [(ngModel)]="fiance.phone" type="phone" [disabled]="isEditingEnable()"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="editingEnable">
+            <button ion-button block outline large (click)="enableEdit()">Editar</button>
+        </ion-item>
+
+        <ion-item *ngIf="!editingEnable">
+            <button ion-button block outline large (click)="updateFiance()">Salvar</button>
+        </ion-item>
+
+
+
+    </ion-list>
 </ion-content>
