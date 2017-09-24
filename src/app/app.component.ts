@@ -26,7 +26,8 @@ export class MyApp {
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
               public events: Events,
-              public awsUtil: AwsUtil
+              public awsUtil: AwsUtil,
+              public menu: MenuController
               ) 
     {
 
@@ -36,7 +37,7 @@ export class MyApp {
       this.awsUtil.initAwsService();
   
       console.log("Set login component as root");
-      this.rootPage = TabsPage;
+      this.rootPage = LoginComponent;
   
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -45,16 +46,24 @@ export class MyApp {
     });
   }
 
+  openPage(page) {
+    // Reset the nav controller to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.rootPage = page;
+
+    // close the menu when clicking a link from the menu
+    this.menu.close();
+}
+
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
       console.log("evento subscribe login");  
       //this.enableMenu(true);
     });
+  }
 
-
-    this.events.subscribe('user:logout', () => {
-      console.log("evento subscribe logout");    
-      //this.enableMenu(false);
-    });
-}
+    enableMenu(loggedIn) {
+      this.menu.enable(loggedIn, 'loggedInMenu');
+      this.menu.enable(!loggedIn, 'loggedOutMenu');
+  }
 }

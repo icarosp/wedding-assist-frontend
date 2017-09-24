@@ -49,8 +49,6 @@ export class ProfilePage {
       });
       
     }
-
-
   }
 
   enableEdit(){
@@ -71,6 +69,21 @@ export class ProfilePage {
     }, error => {
         this.doAlert("Erro",error.json().errors[0]);
     });
+  }
+
+  updateProvider(){
+    this.editingEnable = true;
+    
+        let url = this.waService.GetServiceUrl()+'/user/provider/'+this.provider.providerId;
+        let body = JSON.stringify(this.fiance);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        
+        this.http.put(url, body, options).subscribe(data => {
+                this.doAlert("Aviso","Dados salvos com sucesso!");
+        }, error => {
+            this.doAlert("Erro",error.json().errors[0]);
+        });
   }
 
   isEditingEnable(){

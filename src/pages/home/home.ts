@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { WAService } from "../../providers/wa.service"
-import { AlertController, NavController } from "ionic-angular";
+import {  Events, AlertController, NavController } from "ionic-angular";
+import { EventsService } from "../../providers/events.service";
 
 @Component({
   selector: 'page-home',
@@ -14,8 +15,11 @@ export class HomePage {
   userName: string;
   waService: WAService;
 
-  constructor(public navCtrl: NavController, public http: Http,
-    public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,
+              public http: Http,
+              public alertCtrl: AlertController,
+              public events: Events,
+              public eventService: EventsService) {
     this.waService = new WAService()
     this.hasAnyBid = false;
     this.userName;
