@@ -12,11 +12,10 @@
     <img style="display: block;
                 margin: 0 auto;
                 margin-bottom:5%;"
-                src="https://static.tplugin.com/tplugin/img/unknown-user.png">
+                src="../../assets/image/profile.jpg">
   </ion-avatar>
 
-
-    <ion-list>
+    <ion-list *ngIf="userType == 0">
         <ion-item>
             <ion-label floating>Nome do Noivo(a)</ion-label>
             <ion-input [(ngModel)]="fiance.name" type="text" [disabled]="isEditingEnable()"></ion-input>
@@ -39,8 +38,27 @@
         <ion-item *ngIf="!editingEnable">
             <button ion-button block outline large (click)="updateFiance()">Salvar</button>
         </ion-item>
-
-
-
     </ion-list>
+
+    <ion-list *ngIf="userType == 1">
+        <ion-item>
+            <ion-label floating>Nome do Fornecedor</ion-label>
+            <ion-input [(ngModel)]="provider.providerName" type="text" [disabled]="isEditingEnable()"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Telefone</ion-label>
+            <ion-input  [(ngModel)]="provider.phone" type="text" [disabled]="isEditingEnable()"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="editingEnable">
+            <button ion-button block outline large (click)="enableEdit()">Editar</button>
+        </ion-item>
+
+        <ion-item *ngIf="!editingEnable">
+            <button ion-button block outline large (click)="updateProvider()">Salvar</button>
+        </ion-item>
+    </ion-list>
+
+
 </ion-content>

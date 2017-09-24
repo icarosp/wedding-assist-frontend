@@ -14,6 +14,7 @@ export class HomePage {
   user: any;
   userName: string;
   waService: WAService;
+  greeting: string;
 
   constructor(public navCtrl: NavController,
               public http: Http,
@@ -52,6 +53,8 @@ export class HomePage {
     }, error => {
       this.doAlert("Erro", error.json().errors[0]);
     });
+
+    this.getGreeting();
   }
 
   doAlert(title: string, message: string) {
@@ -61,6 +64,16 @@ export class HomePage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  getGreeting(){
+    var myDate = new Date();
+    if ( myDate.getHours() < 12 )  {
+      this.greeting = 'bom dia!';}
+    else if ( myDate.getHours() >= 12 && myDate.getHours() <= 17 ) 
+     {    this.greeting = 'boa tarde!'; } 
+     else  if ( myDate.getHours() > 17 && myDate.getHours() <= 24 ) {  
+      this.greeting = 'boa noite!';}
   }
 
 }

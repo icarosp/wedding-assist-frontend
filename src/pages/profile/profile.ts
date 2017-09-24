@@ -20,15 +20,17 @@ export class ProfilePage {
     public alertCtrl: AlertController) {
     this.waService = new WAService();
     this.editingEnable = true;
-    console.log(this.fiance);
 
     this.fiance = {name: ""};
+    this.provider = {}
 
     this.userType = this.waService.GetFromDbWithKey("userType");
 
     let id = this.waService.GetFromDbWithKey("id");
 
     if(this.userType == 0){
+      console.log();
+
       let url = this.waService.GetServiceUrl() + '/user/fiance/'+id;
       this.http.get(url).subscribe(data => {
         console.log(data.json().data);
@@ -41,8 +43,8 @@ export class ProfilePage {
     }else{
       let url = this.waService.GetServiceUrl() + '/user/provider/'+id;
       this.http.get(url).subscribe(data => {
-        console.log(data);
-        //this.fianceitems = this.fiances = data.json().data.fiances;
+        console.log(data.json().data);
+        this.provider = data.json().data;
         //console.log(this.fianceitems);
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
