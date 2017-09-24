@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import { Component } from "@angular/core";
 
 export class Budget {
     coupleId: number;
@@ -10,7 +10,7 @@ export class Budget {
         this.services = new Array<BudgetService>();
     }
 
-    AddService(service: BudgetService){
+    AddService(service: BudgetService) {
         this.services.push(service)
     }
 }
@@ -21,12 +21,29 @@ export class BudgetService {
     serviceName: string;
     isSelected: boolean;
 
-    AddCategory(category: BudgetServiceCategory){
+    AddCategory(category: BudgetServiceCategory) {
         this.categories.push(category)
     }
 
     constructor() {
         this.categories = new Array<BudgetServiceCategory>();
+    }
+
+    selected() {
+        console.log("ordem chegou aqui");
+        this.isSelected = !this.isSelected;
+    }
+
+    selectedIcon() {
+        if (this.isSelected)
+            return "md-checkmark";
+        return "md-add";
+    }
+
+    selectedText() {
+        if (this.isSelected)
+            return "Finalizar ";
+        return "Acrescentar/Editar ";
     }
 }
 
@@ -37,18 +54,18 @@ export class BudgetServiceCategory {
     categoryName: string;
     categoryIcon: string;
 
-    AddItems(items: BudgetCategoryItem){
-        this.items.push(items)
+    AddItems(item: BudgetCategoryItem) {
+        this.items.push(item)
     }
 
     constructor() {
         this.items = new Array<BudgetCategoryItem>()
     }
 
-    GetRightIcon(){
-        if(this.items.length < 1)
-          return "md-add";
-        return "md-create";
+    GetRightIcon() {
+        //if (this.items.length < 1)
+            return "md-add";
+       // return "md-create";
     }
 }
 
@@ -58,6 +75,7 @@ export class BudgetCategoryItem {
     peopleQuantity: number;
     type: number;
     selected: boolean;
+    name: string;
 
     constructor() {
         this.selected = false;

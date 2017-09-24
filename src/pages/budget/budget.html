@@ -33,17 +33,23 @@
 
   <div *ngFor="let service of pageBudget.services; trackBy index;">
     <ion-item-group>
-      <ion-item-divider color="light">{{service.serviceName}} 
-          <button ion-button icon-only item-end>
-                Adicionar itens de {{service.serviceName}} 
+      <ion-item-divider color="light">{{service.serviceName}}
+        <button ion-button item-end (click)="service.selected()">
+            {{service.selectedText()}}
+            <ion-icon name="{{service.selectedIcon()}}"></ion-icon>
           </button>
       </ion-item-divider>
-      <button ion-item *ngFor="let category of service.categories; trackBy index;">
-        <ion-label>{{category.categoryName}}</ion-label>
-        <ion-icon name="{{category.categoryIcon}}" item-start color="primary"></ion-icon>
-        <ion-icon name ="{{category.GetRightIcon()}}" item-end></ion-icon>
-      </button>
+      <div *ngIf="service.isSelected">
+        <button ion-item *ngFor="let category of service.categories; trackBy index;" (click)="addItems(category)">
+          <ion-label>{{category.categoryName}}</ion-label>
+          <ion-icon name="{{category.categoryIcon}}" item-start color="primary"></ion-icon>
+          <ion-icon name ="{{category.GetRightIcon()}}" item-end></ion-icon>
+        </button>
+      </div>
+
     </ion-item-group>
+
+
   </div>
 
 
