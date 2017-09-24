@@ -30,6 +30,14 @@ export class SearchPage {
 
   }
 
+  callTo(phone: string){
+    window.location.href='tel:+55'+phone;
+  }
+
+  emailTo(email: string){
+    window.open('mailto:'+email);
+  }
+
   doAlert(title: string, message: string) {
     let alert = this.alertCtrl.create({
       title: title,
