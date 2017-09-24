@@ -11,6 +11,8 @@ export class SearchPage {
   waService: WAService;
   itens: any;
   type: string;
+  fianceitems: Array<string>;
+  fiances: any;
 
   constructor(public navCtrl: NavController,
     public http: Http,
@@ -21,13 +23,18 @@ export class SearchPage {
     if (this.type == "1") {
       let url = this.waService.GetServiceUrl() + '/user/fiances'
       this.http.get(url).subscribe(data => {
-        console.log(data.json().fiances);
-        this.itens = data.json().fiances;
+        //console.log(data.json().fiances);
+        this.fianceitems = this.fiances = data.json().fiances;
+        console.log(this.fianceitems);
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
       });
     }
 
+  }
+
+  onCancel(ev: any){
+    this.fianceitems = this.fiances;
   }
 
   callTo(phone: string){
@@ -37,6 +44,19 @@ export class SearchPage {
   emailTo(email: string){
     window.open('mailto:'+email);
   }
+
+  filterFiances(ev: any) {
+    console.log(ev);
+    
+    let val = ev.target.value;
+
+    if (val && val.trim() !== '') {
+      this.fianceitems = this.fianceitems.filter(function(item) {
+        return item['name'].toLowerCase().includes(val.toLowerCase());
+      });
+    }
+  }
+
 
   doAlert(title: string, message: string) {
     let alert = this.alertCtrl.create({

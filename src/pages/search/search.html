@@ -5,26 +5,31 @@
       <label *ngIf="type == 2">Fornecedores</label>
     </ion-title>
   </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-searchbar placeholder="Filtrar por nome" (ionInput)="filterFiances($event)" [showCancelButton]="true" (ionCancel)="onCancel($event)"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
+
 
 <ion-content padding>
 
-  <ion-item *ngFor='let item of itens; trackBy: index;'>
+
+  <ion-item *ngFor='let item of items; trackBy: index;'>
     <ion-icon name="contacts" item-left large></ion-icon>
     <h1>{{item.name}}</h1>
     <h2>{{item.nickname}}</h2> <button ion-button outline small item-right item-top (click)="callTo(item.phone)">
       
         <ion-icon name="md-call"></ion-icon>
       </button>
-      <button ion-button outline small item-right item-top (click)="emailTo(item.email)">
+    <button ion-button outline small item-right item-top (click)="emailTo(item.email)">
           <ion-icon name="md-mail"></ion-icon>
         </button>
 
     <p>Sexo: <label *ngIf="item.gender == 1">Masculino</label>
       <label *ngIf="item.gender == 2">Feminino</label> </p>
     <p>Idade: {{item.age}} anos
-    
-    
+
+
   </ion-item>
 
 </ion-content>
