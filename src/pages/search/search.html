@@ -33,9 +33,13 @@
   <div *ngIf='type == 0'>
     <ion-item *ngFor='let item of provideritems; trackBy: index;'>
       <ion-icon name="settings" item-left large></ion-icon>
-      <h1>{{item.name}}</h1>
-      <p>Total de Leilões Ganhos: </p>
-      <p>Total de Lances: </p>
+      <h1>{{item.providerName}}</h1>
+      <p>Total de Leilões Ganhos:
+        <ion-badge> {{item.totalOfWinnerBids}}</ion-badge>
+      </p>
+      <p>Total de Lances:
+        <ion-badge> {{item.totalOfBids}}</ion-badge>
+      </p>
       <button ion-button outline small item-right item-top (click)="callTo(item.phone)">
             
               <ion-icon name="md-call"></ion-icon>
@@ -43,6 +47,22 @@
       <button ion-button outline small item-right item-top (click)="emailTo(item.email)">
                 <ion-icon name="md-mail"></ion-icon>
               </button>
+      <p *ngFor='let service of item.services; trackBy index;'>
+        <ion-badge secondary>
+          <span *ngIf="service == 1">Fotógrafo</span>
+          <span *ngIf="service == 2">Buffet</span>
+          <span *ngIf="service == 3">Locação de Espaço</span>
+          <span *ngIf="service == 4">Decoração</span>
+        </ion-badge>
+      </p>
+      <!--<ion-grid>
+        <ion-row>
+          <ion-col col-4>a</ion-col>
+          <ion-col col-4>b</ion-col>
+          <ion-col col-4>c</ion-col>
+          <ion-col col-4>d</ion-col>
+        </ion-row>
+      </ion-grid>-->
     </ion-item>
   </div>
 

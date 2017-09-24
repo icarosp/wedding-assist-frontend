@@ -23,19 +23,21 @@ export class SearchPage {
     this.type = this.waService.GetFromDbWithKey("userType");
 
     if (this.type == "1") {
+      console.log("searching fiances");
       let url = this.waService.GetServiceUrl() + '/user/fiances'
       this.http.get(url).subscribe(data => {
         //console.log(data.json().fiances);
-        this.fianceitems = this.fiances = data.json().fiances;
+        this.fianceitems = this.fiances = data.json().data.fiances;
         console.log(this.fianceitems);
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
       });
     } else {
+      console.log("searching providers");
       let url = this.waService.GetServiceUrl() + '/user/providers'
       this.http.get(url).subscribe(data => {
         //console.log(data.json().fiances);
-        this.provideritems = this.providers = data.json().providers;
+        this.provideritems = this.providers = data.json().data.providers;
         console.log(this.providers);
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
