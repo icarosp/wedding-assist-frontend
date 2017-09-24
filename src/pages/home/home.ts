@@ -10,21 +10,18 @@ import { AlertController, NavController } from "ionic-angular";
 export class HomePage {
 
   hasAnyBid: boolean;
-    user: any;
-    userName: string;
-    waService: WAService;
+  user: any;
+  userName: string;
+  waService: WAService;
 
-  constructor(public navCtrl: NavController,public http: Http,
+  constructor(public navCtrl: NavController, public http: Http,
     public alertCtrl: AlertController) {
-      this.waService = new WAService()
-      this.hasAnyBid = false;
-      this.userName;
-      
-
+    this.waService = new WAService()
+    this.hasAnyBid = false;
+    this.userName;
 
     let email = this.waService.GetFromDbWithKey("email");
     console.log(email);
-
 
     let url = this.waService.GetServiceUrl() + '/user/get_user_by_email'
     let body = JSON.stringify(email);
@@ -36,11 +33,16 @@ export class HomePage {
 
       let userType = data.json().data.userType;
 
-      if(userType == 1)
-        this.userName = data.json().data.providerName;
-      else
+      if (userType == 0) {
+        console.log("fiance");
         this.userName = data.json().data.name;
-
+        this.waService.SaveIntoDbWithKey("id", data.json().data.fianceId);
+      }
+      else {
+        console.log("provider");
+        this.userName = data.json().data.providerName;
+        this.waService.SaveIntoDbWithKey("id", data.json().data.providerId);
+      }
 
       this.waService.SaveIntoDbWithKey("userType", userType);
     }, error => {
@@ -50,11 +52,11 @@ export class HomePage {
 
   doAlert(title: string, message: string) {
     let alert = this.alertCtrl.create({
-        title: title,
-        subTitle: message,
-        buttons: ['OK']
+      title: title,
+      subTitle: message,
+      buttons: ['OK']
     });
     alert.present();
-}
+  }
 
 }
