@@ -1,14 +1,42 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { AlertController, NavController } from "ionic-angular";
+import { WAService } from "../../providers/wa.service"
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'page-bid',
   templateUrl: 'search.html'
 })
 export class SearchPage {
+  waService: WAService;
+  itens: any;
+  type: string;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+    public http: Http,
+    public alertCtrl: AlertController) {
+    this.waService = new WAService()
+    this.type = this.waService.GetFromDbWithKey("userType");
 
+    if (this.type == "1") {
+      let url = this.waService.GetServiceUrl() + '/user/fiances'
+      this.http.get(url).subscribe(data => {
+        console.log(data.json().fiances);
+        this.itens = data.json().fiances;
+      }, error => {
+        this.doAlert("Erro", error.json().errors[0]);
+      });
+    }
+
+  }
+
+  doAlert(title: string, message: string) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

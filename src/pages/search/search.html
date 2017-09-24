@@ -1,16 +1,20 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Orçamento
+      Busca de <label *ngIf="type == 1">Noivos</label>
+               <label *ngIf="type == 2">Fornecedores</label>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <p>Bebidas</p>
+
+    <ion-item *ngFor='let item of itens; trackBy: index;'>
+        <ion-icon name="wine" item-left large ></ion-icon>
+        <h1>Institute of Fine Cocktails</h1>
+        <h2>Institute of Fine Cocktails</h2>
+        <p>14 S. Hop Avenue, Madison, WI 53703</p>
+        <p>14 S. Hop Avenue, Madison, WI 53703</p>
     </ion-item>
-  </ion-list>
 
 </ion-content>

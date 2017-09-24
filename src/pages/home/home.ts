@@ -19,6 +19,7 @@ export class HomePage {
       this.waService = new WAService()
       this.hasAnyBid = false;
       this.userName = "batata";
+      
 
 
     let email = this.waService.GetFromDbWithKey("email");
@@ -33,6 +34,10 @@ export class HomePage {
     this.http.post(url, body, options).subscribe(data => {
       console.log(data.json().data.providerName);
       this.userName = data.json().data.providerName;
+      let userType = data.json().data.userType;
+
+
+      this.waService.SaveIntoDbWithKey("userType", userType);
     }, error => {
       this.doAlert("Erro", error.json().errors[0]);
     });
