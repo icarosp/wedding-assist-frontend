@@ -45,7 +45,6 @@ export class ProfilePage {
       this.http.get(url).subscribe(data => {
         console.log(data.json().data);
         this.provider = data.json().data;
-        //console.log(this.fianceitems);
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
       });
@@ -77,7 +76,7 @@ export class ProfilePage {
     this.editingEnable = true;
     
         let url = this.waService.GetServiceUrl()+'/user/provider/'+this.provider.providerId;
-        let body = JSON.stringify(this.fiance);
+        let body = JSON.stringify(this.provider);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         

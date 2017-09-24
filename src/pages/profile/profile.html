@@ -51,9 +51,20 @@
             <ion-input  [(ngModel)]="provider.phone" type="text" [disabled]="isEditingEnable()"></ion-input>
         </ion-item>
 
+        <ion-item>
+            <ion-label floating>Serviços Oferecidos</ion-label>
+            <ion-select [(ngModel)]="provider.services" multiple="true" [disabled]="isEditingEnable()">
+                <ion-option value="1">Fotógrafo</ion-option>
+                <ion-option value="2">Buffet</ion-option>
+                <ion-option value="3">Locação de Espaço</ion-option>
+                <ion-option value="4">Decoração</ion-option>
+            </ion-select>
+        </ion-item>
+
         <ion-item *ngIf="editingEnable">
             <button ion-button block outline large (click)="enableEdit()">Editar</button>
         </ion-item>
+
 
         <ion-item *ngIf="!editingEnable">
             <button ion-button block outline large (click)="updateProvider()">Salvar</button>
