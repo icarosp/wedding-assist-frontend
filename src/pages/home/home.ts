@@ -18,7 +18,7 @@ export class HomePage {
     public alertCtrl: AlertController) {
       this.waService = new WAService()
       this.hasAnyBid = false;
-      this.userName = "batata";
+      this.userName;
       
 
 
@@ -32,9 +32,14 @@ export class HomePage {
     let options = new RequestOptions({ headers: headers });
 
     this.http.post(url, body, options).subscribe(data => {
-      console.log(data.json().data.providerName);
-      this.userName = data.json().data.providerName;
+      console.log(data.json().data);
+
       let userType = data.json().data.userType;
+
+      if(userType == 1)
+        this.userName = data.json().data.providerName;
+      else
+        this.userName = data.json().data.name;
 
 
       this.waService.SaveIntoDbWithKey("userType", userType);
