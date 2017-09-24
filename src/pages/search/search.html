@@ -10,11 +10,11 @@
 <ion-content padding>
 
     <ion-item *ngFor='let item of itens; trackBy: index;'>
-        <ion-icon name="wine" item-left large ></ion-icon>
-        <h1>Institute of Fine Cocktails</h1>
-        <h2>Institute of Fine Cocktails</h2>
-        <p>14 S. Hop Avenue, Madison, WI 53703</p>
-        <p>14 S. Hop Avenue, Madison, WI 53703</p>
+        <ion-icon name="contacts" item-left large ></ion-icon>
+        <h1>{{item.name}}</h1>
+        <h2>{{item.nickname}}</h2>
+        <p>Sexo: <label *ngIf="item.gender == 2">Masculino</label>
+                 <label *ngIf="item.gender == 1">Feminino</label></p>
     </ion-item>
 
 </ion-content>

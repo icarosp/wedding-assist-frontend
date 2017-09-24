@@ -10,7 +10,8 @@ export class WAService{
     private url: string;
 
     constructor(){
-        this.url = "http://localhost:56934/api/";
+        //this.url = "http://localhost:56934/api/";
+        this.url = 'http://prod-wa-back.us-east-1.elasticbeanstalk.com/api';
     }
 
     GetServiceUrl(){
