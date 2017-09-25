@@ -11,6 +11,7 @@ import { WAService } from "../../providers/wa.service"
 export class BudgetPage {
   pageBudget: Budget;
   waService: WAService;
+  private firstLoaded: boolean = false;
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController) {
@@ -18,6 +19,16 @@ export class BudgetPage {
     this.waService = new WAService();
 
     this.initializeServices();
+  }
+
+  ionViewDidEnter() {
+    if (!this.firstLoaded) {
+      this.pageBudget = null;
+      this.pageBudget = new Budget();
+      this.initializeServices();
+    }
+
+    this.firstLoaded = true;
   }
 
   initializeServices() {

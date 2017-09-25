@@ -15,6 +15,8 @@ export class HomePage {
   userName: string;
   waService: WAService;
   greeting: string;
+  email: string;
+  private firstLoaded: boolean = false;
 
   constructor(public navCtrl: NavController,
               public http: Http,
@@ -25,11 +27,29 @@ export class HomePage {
     this.hasAnyBid = false;
     this.userName;
 
-    let email = this.waService.GetFromDbWithKey("email");
-    console.log(email);
+    this.email = this.waService.GetFromDbWithKey("email");
+
+    //this.loadPageAndData();
+    this.getGreeting();
+  }
+
+  ionViewDidEnter() {
+    //console.log(this.firstLoaded);
+    //if (!this.firstLoaded) {
+      //this.auctions = null;
+      //this.auctions = new Object();
+      this.loadPageAndData();
+    //}
+
+    //this.firstLoaded = true;
+  }
+
+
+  loadPageAndData(){
+    console.log("duplicou aqui");
 
     let url = this.waService.GetServiceUrl() + '/user/get_user_by_email'
-    let body = JSON.stringify(email);
+    let body = JSON.stringify(this.email);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
@@ -42,6 +62,7 @@ export class HomePage {
         console.log("fiance");
         this.userName = data.json().data.name;
         this.waService.SaveIntoDbWithKey("id", data.json().data.fianceId);
+        this.waService.SaveIntoDbWithKey("coupleId", data.json().data.coupleId);
       }
       else {
         console.log("provider");
@@ -54,8 +75,9 @@ export class HomePage {
       this.doAlert("Erro", error.json().errors[0]);
     });
 
-    this.getGreeting();
   }
+
+
 
   doAlert(title: string, message: string) {
     let alert = this.alertCtrl.create({

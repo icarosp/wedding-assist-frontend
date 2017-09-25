@@ -82,9 +82,9 @@ export class BudgetStepTwoPage {
 
   getCategoryName(id: any) {
     switch (id) {
-      case 1:
-        return "Comida";
       case 2:
+        return "Comida";
+      case 1:
         return "Bebida";
       case 3:
         return "Cadeira";

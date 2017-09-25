@@ -14,16 +14,29 @@ export class BidPage {
   auctions: any;
   userType: any;
   controler: any;
+  private firstLoaded: boolean = false;
 
   constructor(public navCtrl: NavController,
     public http: Http,
     public alertCtrl: AlertController) {
-
-    //this.StartTimer();
+      
     this.waService = new WAService();
 
     this.userType = this.waService.GetFromDbWithKey("userType");
+    this.loadPageAndData();
+  }
 
+  ionViewDidEnter() {
+    if (!this.firstLoaded) {
+      this.auctions = null;
+      this.auctions = new Object();
+      this.loadPageAndData();
+    }
+
+    this.firstLoaded = true;
+  }
+
+  loadPageAndData() {
     if (this.userType == 0) {
 
       let id = this.waService.GetFromDbWithKey("coupleId");
@@ -50,9 +63,9 @@ export class BidPage {
       });
 
     }
-
-
   }
+
+
 
   doAlert(title: string, message: string) {
     let alert = this.alertCtrl.create({

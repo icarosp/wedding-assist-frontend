@@ -1,6 +1,8 @@
 {
   "name": "WeddingAssist",
-  "app_id": "39147315",
+  "app_id": "310718de",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController } from "ionic-angular";
 import { WAService } from "../../providers/wa.service"
+import { HomePage } from "../home/home"
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Component({
@@ -22,6 +23,8 @@ export class SearchPage {
     this.waService = new WAService()
     this.type = this.waService.GetFromDbWithKey("userType");
 
+    console.log("vezes no construtor");
+
     if (this.type == "1") {
       console.log("searching fiances");
       let url = this.waService.GetServiceUrl() + '/user/fiances'
@@ -29,6 +32,9 @@ export class SearchPage {
         //console.log(data.json().fiances);
         this.fianceitems = this.fiances = data.json().data.fiances;
         console.log(this.fianceitems);
+
+        if(this.fianceitems.length == 0){}
+          this.redirectHomePage("fornecedor");
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
       });
@@ -39,12 +45,33 @@ export class SearchPage {
         //console.log(data.json().fiances);
         this.provideritems = this.providers = data.json().data.providers;
         console.log(this.providers);
+        this.doAlert("Aviso","Não existe nenhum noivo cadastrado no momento");
+
+        if(this.provideritems.length == 0){}
+        this.redirectHomePage("noivo");
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
       });
     }
-
   }
+
+  redirectHomePage(userType: string){
+      let alert = this.alertCtrl.create({
+        title: 'Aviso',
+        message: 'Não existe nenhum '+userType+' cadastrado no momento.',
+        buttons: [
+          {
+            text: 'Voltar',
+            handler: () => {
+              this.navCtrl.setRoot(HomePage);
+              this.navCtrl.push(HomePage);
+            }
+          }
+        ]
+      });
+      alert.present();
+  }
+
   //ion-android-notifications
 
   onCancel(ev: any) {
