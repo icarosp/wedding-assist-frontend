@@ -6,26 +6,30 @@
   </ion-navbar>
 </ion-header>
 
+abc
+<timer #timer [timeInSeconds]="80"></timer>
 <ion-content>
   <ion-card *ngFor="let auction of auctions; trackBy index;">
-    <ion-item-divider color="green" text-center *ngIf="auction.IsAuctionActive">
+    <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
       <ion-label text-left>EM ANDAMENTO</ion-label>
-      <ion-label text-right>1h 20m restantes</ion-label>
+      <ion-label text-right> <timer #timer [timeInSeconds]="60"></timer> restantes</ion-label>
     </ion-item-divider>
-    <ion-item-divider color="red" text-center *ngIf="!auction.IsAuctionActive">
+    <ion-item-divider color="red" text-center *ngIf="!auction.isAuctionActive">
       <ion-label text-left>ENCERRADO</ion-label>
+      <ion-label text-right></ion-label>  restantes
     </ion-item-divider>
 
     <ion-card-content padding style="padding-top: 3%;">
-      <h2>Criação</h2>
-      <h2>Quantidade de Lances: {{auction.NumberOfBids}}</h2>
+      <h2>Data de Criação: {{auction.formatedCreationDate}}</h2>
+      <h2>Data de Expiração: {{auction.formatedEndDate}}</h2>
+      <h2>Quantidade de Lances: {{auction.numberOfBids}}</h2>
     </ion-card-content>
 
     <ion-item-group>
-      <ion-item-divider color="green" text-center *ngIf="auction.IsAuctionActive">
+      <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
         Lances
       </ion-item-divider>
-      <ion-item-divider color="red" text-center *ngIf="!auction.IsAuctionActive">
+      <ion-item-divider color="red" text-center *ngIf="!auction.isAuctionActive">
           Lances
         </ion-item-divider>
       <button ion-item>
@@ -37,8 +41,8 @@
     <ion-row>
       <ion-col center text-center>
         <ion-item>
-          <button *ngIf="auction.IsAuctionActive" ion-button color="green" full>Ver Detalhes do Orçamento</button>
-          <button *ngIf="!auction.IsAuctionActive" ion-button color="red" full>Ver Detalhes do Orçamento</button>
+          <button *ngIf="auction.isAuctionActive" ion-button color="green" full>Ver Detalhes do Orçamento</button>
+          <button *ngIf="!auction.isAuctionActive" ion-button color="red" full>Ver Detalhes do Orçamento</button>
         </ion-item>
       </ion-col>
     </ion-row>

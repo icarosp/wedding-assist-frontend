@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { TimerComponent } from '../../utils/timer';
 
 @Component({
   selector: 'page-bid',
@@ -11,17 +12,25 @@ export class BidPage {
   waService: WAService;
   auctions: any;
   userType: any;
+  controler: any;
+  timer: TimerComponent;
 
   constructor(public navCtrl: NavController,
     public http: Http,
     public alertCtrl: AlertController) {
 
       this.waService = new WAService();
+      
+      setTimeout(() => {
+        this.timer.startTimer();
+      }, 1000)
+
+      this.timer = new TimerComponent();
+      this.timer.startTimer();
 
       this.userType = this.waService.GetFromDbWithKey("userType");
 
       if(this.userType == 0){
-        console.log();
 
         let id = this.waService.GetFromDbWithKey("coupleId");
   

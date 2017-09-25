@@ -19,6 +19,7 @@ import { HttpModule } from '@angular/http';
 import { BudgetPage } from '../pages/budget/budget';
 import { SearchPage } from '../pages/search/search';
 import { BudgetStepTwoPage } from '../pages/budgetStepTwo/budgetStepTwo'
+import { TimerComponent } from '../utils/timer';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -37,7 +38,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ConfirmRegistrationComponent,
     BudgetPage,
     SearchPage,
-    BudgetStepTwoPage
+    BudgetStepTwoPage,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
