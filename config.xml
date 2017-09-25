@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="wedding.assist" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Wedding Assist</name>
     <description>MVP TCC FIAP 2017</description>
-    <author email="icaro.ifg@gmail.com" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <author email="icaro.ifg@gmail.com" href="http://ionicframework.com/">DEV</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -44,8 +44,9 @@
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
-    <engine name="android" spec="~6.2.3" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreenDelay" value="3000" />
+    <engine name="android" spec="^6.2.3" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
 </widget>
