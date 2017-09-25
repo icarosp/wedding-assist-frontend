@@ -14,7 +14,7 @@ export class Budget {
         this.services.push(service)
     }
 
-    GetService(name: string):BudgetService{
+    GetService(name: string): BudgetService {
         return this.services.find(item => item.serviceName === name);
     }
 }
@@ -50,7 +50,7 @@ export class BudgetService {
         return "Acrescentar/Editar ";
     }
 
-    GetCategory(object: any): number{
+    GetCategory(object: any): number {
         return this.categories.indexOf(object);
     }
 }
@@ -73,8 +73,18 @@ export class BudgetServiceCategory {
 
     GetRightIcon() {
         //if (this.items.length < 1)
-            return "md-add";
-       // return "md-create";
+        return "md-add";
+        // return "md-create";
+    }
+
+    hasSelectedItems() {
+        if (this.items.find(x => x.isSelected === true) != null)
+            return true;
+        return false;
+    }
+
+    unselectAllItems(){
+        this.items.forEach(x=> x.isSelected = false);
     }
 }
 

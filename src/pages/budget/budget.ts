@@ -88,7 +88,7 @@ export class BudgetPage {
     alert.setTitle('Selecione quais tipos de ' + category.categoryName + ' você deseja acresentar no orçamento');
 
     for (let item of category.items) {
-      
+
       alert.addInput({
         type: 'checkbox',
         label: item.name,
@@ -102,26 +102,42 @@ export class BudgetPage {
       text: 'Salvar',
       handler: data => {
 
+        if (data.lengt > 0) {
+          console.log("nao tem nada");
+        }
+        else {
+          console.log("tem algo");
+        }
         console.log(data);
 
+        let hasSomethingOnThisCategory: boolean;
+        hasSomethingOnThisCategory = false;
 
         for (let itemSelect of data) {
-          for(let itemOnCategory of category.items){
-            if(itemSelect == itemOnCategory.type)
-            itemOnCategory.isSelected = true;
+          for (let itemOnCategory of category.items) {
+            if (itemSelect == itemOnCategory.type) {
+              itemOnCategory.isSelected = true;
+              hasSomethingOnThisCategory = true;
+            }
           }
         }
 
-       let index: number =  this.pageBudget.GetService(service.serviceName).GetCategory(category);
-       console.log(index);
-       console.log(this.pageBudget.GetService(service.serviceName).categories[0]);
-       this.pageBudget.GetService(service.serviceName).categories.splice(index,1);
-       console.log(this.pageBudget);
-       this.pageBudget.GetService(service.serviceName).AddCategory(category);
-       console.log(this.pageBudget);
+
+        if (hasSomethingOnThisCategory) {
+          //GET INDEX OF CATEGORY TO BE EXCLUDED
+          let index: number = this.pageBudget.GetService(service.serviceName).GetCategory(category);
+          //EXCLUDE CATEGORY WHICH HAS NO ITEM OR OLD ITEMS SELECTED
+          this.pageBudget.GetService(service.serviceName).categories.splice(index, 1);
+          //INCLUDED NEW CATEGORY WITH ALL USER SELECTED ITEMS CHECKED
+          this.pageBudget.GetService(service.serviceName).AddCategory(category);
+        } else {
+          //GET INDEX OF CATEGORY TO BE EXCLUDED
+          let index: number = this.pageBudget.GetService(service.serviceName).GetCategory(category);
+          //EXCLUDE CATEGORY WHICH HAS NO ITEM OR OLD ITEMS SELECTED
+          this.pageBudget.GetService(service.serviceName).categories[index].unselectAllItems();
+        }
       }
     });
-
 
     alert.present();
   }
