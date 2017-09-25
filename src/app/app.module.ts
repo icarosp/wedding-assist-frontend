@@ -18,6 +18,7 @@ import { ConfirmRegistrationComponent } from "../pages/auth/confirmregistration/
 import { HttpModule } from '@angular/http';
 import { BudgetPage } from '../pages/budget/budget';
 import { SearchPage } from '../pages/search/search';
+import { BudgetStepTwoPage } from '../pages/budgetStepTwo/budgetStepTwo'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,7 +36,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RegisterComponent,
     ConfirmRegistrationComponent,
     BudgetPage,
-    SearchPage
+    SearchPage,
+    BudgetStepTwoPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RegisterComponent,
     ConfirmRegistrationComponent,
     BudgetPage,
-    SearchPage
+    SearchPage,
+    BudgetStepTwoPage
   ],
   providers: [
     CognitoUtil,

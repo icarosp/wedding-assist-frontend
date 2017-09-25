@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo'
 import { Budget, BudgetService, BudgetServiceCategory, BudgetCategoryItem } from '../../models/budget.model';
 
 @Component({
-  selector: 'page-bid',
-  templateUrl: 'budget.html'
+  selector: 'budget',
+  templateUrl: 'budgetStepTwo.html'
 })
-export class BudgetPage {
-  //services: BudgetService;
+export class BudgetStepTwoPage {
   pageBudget: Budget;
   //pageBudgetServiceCategory: BudgetServiceCategory;
 
   constructor(public navCtrl: NavController,
-    public alertCtrl: AlertController,
-    public budgetStepTwo: BudgetStepTwoPage) {
+    public alertCtrl: AlertController) {
     this.pageBudget = new Budget();
 
     this.initializeServices();
@@ -147,6 +144,6 @@ export class BudgetPage {
   nextStep(){
     //let finalBudget: Budget;
 
-    this.navCtrl.push(budgetStepTwo);
+    //this.navCtrl.push(finalBudget);
   }
 }

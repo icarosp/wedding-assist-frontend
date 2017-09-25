@@ -86,6 +86,15 @@ export class BudgetServiceCategory {
     unselectAllItems(){
         this.items.forEach(x=> x.isSelected = false);
     }
+
+    selectSomeItems(items: Array<string>){
+        //for(let item in items){
+          //  for(let itemOnThisObject in this.items){
+            //    if(item == itemOnThisObject.name)
+                    
+            //}
+        //}
+    }
 }
 
 
