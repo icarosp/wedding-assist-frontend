@@ -34,7 +34,7 @@
           </ion-item>
           <ion-item>
             <ion-label>Descrição</ion-label>
-            <ion-input style="height: 50px;" type="text"></ion-input>
+            <ion-input [(ngModel)]="item.description" style="height: 50px;" type="text"></ion-input>
           </ion-item>
           <ion-item-divider *ngIf="!last" color="grey"></ion-item-divider>
         </div>

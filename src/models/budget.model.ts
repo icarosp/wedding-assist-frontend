@@ -8,6 +8,7 @@ export class Budget {
 
     constructor() {
         this.services = new Array<BudgetService>();
+        this.coupleId = 1;
     }
 
     AddService(service: BudgetService) {
@@ -27,14 +28,18 @@ export class Budget {
                 category.items.forEach(item => {
                     if (item.isSelected) {
 
+                        console.log(category);
+
                         let bufferCategory: BudgetServiceCategory;
                         bufferCategory = new BudgetServiceCategory();
                         bufferCategory.categoryName = category.categoryName;
+                        bufferCategory.category = category.category;
                         bufferCategory.AddItems(item);
 
                         let bufferService: BudgetService
                         bufferService = new BudgetService();
                         bufferService.AddCategory(bufferCategory);
+                        bufferService.serviceType = service.serviceType;
                         bufferService.serviceName = service.serviceName;
 
                         if (filteredBudget.services.find(x => x.serviceName == service.serviceName) === undefined) {
@@ -100,7 +105,7 @@ export class BudgetService {
 
 export class BudgetServiceCategory {
     items: Array<BudgetCategoryItem>;
-    category: number;
+    category: any;
     description: string;
     categoryName: string;
     categoryIcon: string;

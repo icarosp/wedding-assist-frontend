@@ -32,12 +32,16 @@ export class BudgetPage {
     category = new BudgetServiceCategory();
     category.categoryName = "Comidas";
     category.categoryIcon = "pizza";
+    category.category = "1";
+
+    console.log(category);
 
     //ITEM BRAZILIAN FOOD
     let item: BudgetCategoryItem;
     item = new BudgetCategoryItem();
     item.name = "Brasileira"
     item.type = "1";
+
     category.AddItems(item);
 
     //ITEM ITALIAN FOOD
@@ -76,6 +80,7 @@ export class BudgetPage {
     category2 = new BudgetServiceCategory();
     category2.categoryName = "Bebidas";
     category2.categoryIcon = "pizza";
+    category2.category = "2";
 
     //ITEM BEER
     let item8: BudgetCategoryItem;
@@ -113,6 +118,7 @@ export class BudgetPage {
     category3 = new BudgetServiceCategory();
     category3.categoryName = "Cadeira";
     category3.categoryIcon = "pizza";
+    category3.category = "3";
 
     //ITEM CERIMONY CHAIR
     let item6: BudgetCategoryItem;
@@ -135,6 +141,7 @@ export class BudgetPage {
     category4 = new BudgetServiceCategory();
     category4.categoryName = "Mesa";
     category4.categoryIcon = "pizza";
+    category4.category = "4";
 
     //ITEM EVENT CHAIR
     let item11: BudgetCategoryItem;
