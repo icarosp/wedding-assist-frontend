@@ -13,6 +13,10 @@ export class Budget {
     AddService(service: BudgetService) {
         this.services.push(service)
     }
+
+    GetService(name: string):BudgetService{
+        return this.services.find(item => item.serviceName === name);
+    }
 }
 
 export class BudgetService {
@@ -45,6 +49,10 @@ export class BudgetService {
             return "Finalizar ";
         return "Acrescentar/Editar ";
     }
+
+    GetCategory(object: any): number{
+        return this.categories.indexOf(object);
+    }
 }
 
 export class BudgetServiceCategory {
@@ -53,6 +61,7 @@ export class BudgetServiceCategory {
     description: string;
     categoryName: string;
     categoryIcon: string;
+    iSelected: boolean;
 
     AddItems(item: BudgetCategoryItem) {
         this.items.push(item)
@@ -73,12 +82,12 @@ export class BudgetServiceCategory {
 export class BudgetCategoryItem {
     description: string;
     peopleQuantity: number;
-    type: number;
-    selected: boolean;
+    type: string;
+    isSelected: boolean;
     name: string;
 
     constructor() {
-        this.selected = false;
+        this.isSelected = false;
     }
 }
 

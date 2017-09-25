@@ -7,9 +7,9 @@ import { Budget, BudgetService, BudgetServiceCategory, BudgetCategoryItem } from
   templateUrl: 'budget.html'
 })
 export class BudgetPage {
-  services: BudgetService;
+  //services: BudgetService;
   pageBudget: Budget;
-  pageBudgetServiceCategory: BudgetServiceCategory;
+  //pageBudgetServiceCategory: BudgetServiceCategory;
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController) {
@@ -32,31 +32,31 @@ export class BudgetPage {
     let item: BudgetCategoryItem;
     item = new BudgetCategoryItem();
     item.name = "Brasileira"
-    item.type = 1;
+    item.type = "1";
     category.AddItems(item);
 
     let item2: BudgetCategoryItem;
     item2 = new BudgetCategoryItem();
     item2.name = "Italiana"
-    item2.type = 2;
+    item2.type = "2";
     category.AddItems(item2);
 
     let item3: BudgetCategoryItem;
     item3 = new BudgetCategoryItem();
     item3.name = "Arabe"
-    item3.type = 3;
+    item3.type = "3";
     category.AddItems(item3);
 
     let item4: BudgetCategoryItem;
     item4 = new BudgetCategoryItem();
     item4.name = "Japonesa"
-    item4.type = 4;
+    item4.type = "4";
     category.AddItems(item4);
 
     let item5: BudgetCategoryItem;
     item5 = new BudgetCategoryItem();
     item5.name = "Koreana"
-    item5.type = 5;
+    item5.type = "5";
     category.AddItems(item5);
 
     console.log(category);
@@ -83,17 +83,17 @@ export class BudgetPage {
     console.log(this.pageBudget);
   }
 
-  addItems(category: BudgetServiceCategory) {
+  addItems(category: BudgetServiceCategory, service: BudgetService) {
     let alert = this.alertCtrl.create();
     alert.setTitle('Selecione quais tipos de ' + category.categoryName + ' você deseja acresentar no orçamento');
 
     for (let item of category.items) {
-      console.log(item);
-
+      
       alert.addInput({
         type: 'checkbox',
         label: item.name,
-        value: item.name
+        value: item.type,
+        checked: item.isSelected
       });
     }
 
@@ -101,12 +101,28 @@ export class BudgetPage {
     alert.addButton({
       text: 'Salvar',
       handler: data => {
-        console.log('Checkbox data:', data);
-        //this.testCheckboxOpen = false;
-        //this.testCheckboxResult = data;
+
+        console.log(data);
+
+
+        for (let itemSelect of data) {
+          for(let itemOnCategory of category.items){
+            if(itemSelect == itemOnCategory.type)
+            itemOnCategory.isSelected = true;
+          }
+        }
+
+       let index: number =  this.pageBudget.GetService(service.serviceName).GetCategory(category);
+       console.log(index);
+       console.log(this.pageBudget.GetService(service.serviceName).categories[0]);
+       this.pageBudget.GetService(service.serviceName).categories.splice(index,1);
+       console.log(this.pageBudget);
+       this.pageBudget.GetService(service.serviceName).AddCategory(category);
+       console.log(this.pageBudget);
       }
     });
+
+
     alert.present();
   }
-
 }
