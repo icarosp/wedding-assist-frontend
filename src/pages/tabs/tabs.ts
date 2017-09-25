@@ -22,10 +22,12 @@ export class TabsPage {
   tab4Root = SearchPage;
   tab5Root = ProfilePage;
 
-  constructor(){
+  constructor() {
     this.waService = new WAService()
-    if(this.waService.GetFromDbWithKey("userType") === 1)
-    this.isProvider = true;
+
+    if (this.waService.GetFromDbWithKey("userType") === 1)
+      this.isProvider = true;
+    console.log(this.isProvider);
   }
 
 
