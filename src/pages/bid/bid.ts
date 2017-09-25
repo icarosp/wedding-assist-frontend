@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { TimerComponent } from '../../utils/timer';
 
 @Component({
   selector: 'page-bid',
@@ -13,20 +12,13 @@ export class BidPage {
   auctions: any;
   userType: any;
   controler: any;
-  timer: TimerComponent;
 
   constructor(public navCtrl: NavController,
     public http: Http,
     public alertCtrl: AlertController) {
 
+      this.startTimer();
       this.waService = new WAService();
-      
-      setTimeout(() => {
-        this.timer.startTimer();
-      }, 1000)
-
-      this.timer = new TimerComponent();
-      this.timer.startTimer();
 
       this.userType = this.waService.GetFromDbWithKey("userType");
 
@@ -69,4 +61,23 @@ export class BidPage {
     alert.present();
   }
 
+  startTimer() {
+    var presentTime =  3 + ":" + 0;
+    //console.log(presentTime);
+    var timeArray: any = presentTime.split(/[:]+/);
+    var m = timeArray[0];
+    var s = this.checkSecond((timeArray[1] - 1));
+    if(s==59){m=m-1}
+    //if(m<0){alert('timer completed')}
+    
+    presentTime =
+      m + ":" + s;
+    setTimeout(this.startTimer, 1000);
+  }
+
+  checkSecond(sec) {
+    if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+    if (sec < 0) {sec = "59"};
+    return sec;
+  }
 }

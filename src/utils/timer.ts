@@ -29,12 +29,14 @@ export class TimerComponent {
         if(!this.timeInSeconds) { this.timeInSeconds = 0; }
 
         this.timer = <ITimer>{
-            seconds: this.timeInSeconds,
+            seconds: 100,
             runTimer: false,
             hasStarted: false,
             hasFinished: false,
             secondsRemaining: this.timeInSeconds
         };
+
+        console.log("até aqui rodou");
 
         this.timer.displayTime = this.getSecondsAsDigitalClock(this.timer.secondsRemaining);
     }
