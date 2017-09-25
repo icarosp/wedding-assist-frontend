@@ -21,22 +21,26 @@ export class BudgetPage {
   }
 
   initializeServices() {
+    //SERVICE BUFFET
     let service: BudgetService;
     service = new BudgetService();
     service.serviceType = 1;
     service.serviceName = "Buffet";
 
+    //CATEGORY FOOD
     let category: BudgetServiceCategory;
     category = new BudgetServiceCategory();
     category.categoryName = "Comidas";
     category.categoryIcon = "pizza";
 
+    //ITEM BRAZILIAN FOOD
     let item: BudgetCategoryItem;
     item = new BudgetCategoryItem();
     item.name = "Brasileira"
     item.type = "1";
     category.AddItems(item);
 
+    //ITEM ITALIAN FOOD
     let item2: BudgetCategoryItem;
     item2 = new BudgetCategoryItem();
     item2.name = "Italiana"
@@ -44,42 +48,95 @@ export class BudgetPage {
     item2.isSelected = true;
     category.AddItems(item2);
 
+    //ITEM ARABIAN FOOD
     let item3: BudgetCategoryItem;
     item3 = new BudgetCategoryItem();
     item3.name = "Arabe"
     item3.type = "3";
     category.AddItems(item3);
 
+    //ITEM JAPANESE FOOD
     let item4: BudgetCategoryItem;
     item4 = new BudgetCategoryItem();
     item4.name = "Japonesa"
     item4.type = "4";
     category.AddItems(item4);
 
+    //ITEM KOREAN FOOD
     let item5: BudgetCategoryItem;
     item5 = new BudgetCategoryItem();
     item5.name = "Koreana"
     item5.type = "5";
     category.AddItems(item5);
 
-    console.log(category);
-
-
     service.AddCategory(category);
 
+    //CATEGORY DRINKS
     let category2: BudgetServiceCategory;
     category2 = new BudgetServiceCategory();
     category2.categoryName = "Bebidas";
     category2.categoryIcon = "pizza";
 
+    //ITEM BEER
+    let item8: BudgetCategoryItem;
+    item8 = new BudgetCategoryItem();
+    item8.name = "Cerveja"
+    item8.type = "8";
+    category2.AddItems(item8);
+
+    //ITEM JUICE
+    let item9: BudgetCategoryItem;
+    item9 = new BudgetCategoryItem();
+    item9.name = "Suco"
+    item9.type = "9";
+    category2.AddItems(item4);
+
+    //ITEM BEVERAGE
+    let item10: BudgetCategoryItem;
+    item10 = new BudgetCategoryItem();
+    item10.name = "Refrigerante"
+    item10.type = "10";
+    category2.AddItems(item10);
+
     service.AddCategory(category2);
 
     this.pageBudget.AddService(service);
 
+    //SERVICE DECORATION
     let service2: BudgetService;
     service2 = new BudgetService();
     service2.serviceType = 2;
     service2.serviceName = "Decoração";
+
+    //CATEGORY CHAIR
+    let category3: BudgetServiceCategory;
+    category3 = new BudgetServiceCategory();
+    category3.categoryName = "Cadeira";
+    category3.categoryIcon = "pizza";
+
+    //ITEM CERIMONY CHAIR
+    let item6: BudgetCategoryItem;
+    item6 = new BudgetCategoryItem();
+    item6.name = "Cadeira de Cerimonia"
+    item6.type = "6";
+    category3.AddItems(item6);
+
+    //ITEM EVENT CHAIR
+    let item7: BudgetCategoryItem;
+    item7 = new BudgetCategoryItem();
+    item7.name = "Cadeira de Evento"
+    item7.type = "7";
+    category3.AddItems(item7);
+
+    service2.AddCategory(category3);
+
+    //CATEGORY TABLE
+    let category4: BudgetServiceCategory;
+    category4 = new BudgetServiceCategory();
+    category4.categoryName = "Mesa";
+    category4.categoryIcon = "pizza";
+
+    service2.AddCategory(category4);
 
     this.pageBudget.AddService(service2);
   }
@@ -142,8 +199,8 @@ export class BudgetPage {
     alert.present();
   }
 
-  nextStep(){
+  nextStep() {
     //this.waService.SaveIntoDbWithKey("budget", this.pageBudget);
-    this.navCtrl.push(BudgetStepTwoPage, {budget: this.pageBudget});
+    this.navCtrl.push(BudgetStepTwoPage, { budget: this.pageBudget });
   }
 }

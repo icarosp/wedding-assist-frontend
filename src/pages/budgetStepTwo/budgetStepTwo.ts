@@ -21,34 +21,6 @@ export class BudgetStepTwoPage {
     let oldBudget = navParams.get("budget");
     this.pageBudget = oldBudget.getFilteredBudget();
 
-    /*oldBudget.services.forEach(service => {
-      service.categories.forEach(category => {
-        category.items.forEach(item => {
-          if (item.isSelected) {
-
-            let bufferCategory: BudgetServiceCategory;
-            bufferCategory = new BudgetServiceCategory();
-            bufferCategory.categoryName = category.categoryName;
-            bufferCategory.AddItems(item);
-
-            let bufferService: BudgetService
-            bufferService = new BudgetService();
-            bufferService.AddCategory(bufferCategory);
-            bufferService.serviceName = service.serviceName;
-
-            if (this.pageBudget.services.find(x => x.serviceName == service.serviceName) === undefined) {
-              this.pageBudget.AddService(bufferService);
-            } else {
-              if (this.pageBudget.GetService(service.serviceName).categories.find(x => x.categoryName == category.categoryName) === undefined)
-                this.pageBudget.GetService(service.serviceName).AddCategory(category);
-              else
-                this.pageBudget.GetService(service.serviceName).GetCategoryObject(category.categoryName).AddItems(item);
-            }
-          }
-        });
-      });
-    });*/
-
     console.log(this.pageBudget);
   }
 }
