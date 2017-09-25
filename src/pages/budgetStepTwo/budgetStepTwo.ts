@@ -25,7 +25,13 @@ export class BudgetStepTwoPage {
     console.log(this.pageBudget);
   }
 
-  sendBudget(){
+  sendBudget(duration: any){
+    //adding auction duration
+    //this.pageBudget.duration = '2017-08-09';
+    this.pageBudget.coupleId = this.waService.GetFromDbWithKey("coupleId");
+    console.log(this.pageBudget);
+
+
     let url = this.waService.GetServiceUrl()+'/budget/save_budget/';
     let body = JSON.stringify(this.pageBudget);
     let headers = new Headers({ 'Content-Type': 'application/json' });

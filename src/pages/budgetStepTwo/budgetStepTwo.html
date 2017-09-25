@@ -45,11 +45,11 @@
     <ion-item-divider color="grey"></ion-item-divider>
     <ion-item>
       <ion-label>Fim do Leilão</ion-label>
-      <ion-datetime min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="myDate"></ion-datetime>
+      <ion-datetime min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="pageBudget.duration"></ion-datetime>
     </ion-item>
     <ion-item-divider color="grey"></ion-item-divider>
     <ion-item>
-      <button ion-button block outline large (click)="sendBudget()">Enviar Orçamento</button>
+      <button ion-button block outline large (click)="sendBudget(myDate)">Enviar Orçamento</button>
     </ion-item>
   </ion-item-group>
 </ion-content>
