@@ -49,7 +49,6 @@ export class BudgetPage {
     item2 = new BudgetCategoryItem();
     item2.name = "Italiana"
     item2.type = "7";
-    item2.isSelected = true;
     category.AddItems(item2);
 
     //ITEM ARABIAN FOOD
@@ -214,7 +213,19 @@ export class BudgetPage {
   }
 
   nextStep() {
-    //this.waService.SaveIntoDbWithKey("budget", this.pageBudget);
-    this.navCtrl.push(BudgetStepTwoPage, { budget: this.pageBudget });
+
+    if (this.pageBudget.getFilteredBudget().services.length < 1)
+      this.doAlert("Erro", "Selecione ao menos um item para prosseguir com o orçamento!");
+    else
+      this.navCtrl.push(BudgetStepTwoPage, { budget: this.pageBudget });
+  }
+
+  doAlert(title: string, message: string) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }
