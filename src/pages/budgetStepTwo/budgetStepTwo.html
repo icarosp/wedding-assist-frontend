@@ -13,11 +13,14 @@
       <ion-item-divider *ngIf="editable" color="light">{{getServiceName(service.serviceType)}}</ion-item-divider>
 
       <div *ngFor="let category of service.categories; trackBy index;">
-        <ion-item-divider color="grey">{{category.categoryName}}
+        <ion-item-divider *ngIf="!editable" color="grey">{{category.categoryName}}
         </ion-item-divider>
+        <ion-item-divider *ngIf="editable" color="grey">{{getCategoryName(category.category)}}
+          </ion-item-divider>
         <div *ngFor="let item of category.items; trackBy index; let last = last">
           <ion-item>
-            <ion-label>Qtd. de Pessoas - {{item.name}}</ion-label>
+            <ion-label *ngIf="!editable">Qtd. de Pessoas - {{item.name}}</ion-label>
+            <ion-label *ngIf="editable">Qtd. de Pessoas - {{getItemName(item.type)}}</ion-label>
             <ion-select [(ngModel)]="item.peopleQuantity" [disabled]="editable">
               <ion-option value="10" selected="true">10</ion-option>
               <ion-option value="20">20</ion-option>
@@ -46,7 +49,8 @@
     <ion-item-divider color="grey"></ion-item-divider>
     <ion-item>
       <ion-label>Fim do Leilão</ion-label>
-      <ion-datetime min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="pageBudget.duration" [disabled]="editable"></ion-datetime>
+      <ion-datetime *ngIf="!editable" min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="pageBudget.duration" [disabled]="editable"></ion-datetime>
+      <ion-datetime *ngIf="editable" min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="pageBudget.duration" [disabled]="editable"></ion-datetime>
     </ion-item>
     <ion-item-divider color="grey"></ion-item-divider>
     <ion-item>

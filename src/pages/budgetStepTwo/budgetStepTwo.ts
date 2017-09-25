@@ -20,8 +20,8 @@ export class BudgetStepTwoPage {
     public navParams: NavParams,
     public http: Http) {
 
-      let date = new Date();
-      date.setTime( date.getTime() + date.getTimezoneOffset()*-60*1000+60 ); 
+    let date = new Date();
+    date.setTime(date.getTime() + date.getTimezoneOffset() * -60 * 1000 + 60);
 
     //var n = today.toISOString();
 
@@ -58,7 +58,7 @@ export class BudgetStepTwoPage {
     });
   }
 
-  backToBidPage(){
+  backToBidPage() {
     this.navCtrl.pop();
   }
 
@@ -71,9 +71,7 @@ export class BudgetStepTwoPage {
     alert.present();
   }
 
-  getServiceName(id: any){
-    console.log(id);
-
+  getServiceName(id: any) {
     switch (id) {
       case 2:
         return "Buffet";
@@ -81,4 +79,43 @@ export class BudgetStepTwoPage {
         return "Decoração";
     }
   }
+
+  getCategoryName(id: any) {
+    switch (id) {
+      case 1:
+        return "Comida";
+      case 2:
+        return "Bebida";
+      case 3:
+        return "Cadeira";
+      case 4:
+        return "Mesa";
+    }
+  }
+
+  getItemName(id: any) {
+    switch (id) {
+      case 3:
+        return "Cerveja";
+      case 4:
+        return "Suco";
+      case 5:
+        return "Refrigerante";
+      case 6:
+        return "Brasileiro";
+      case 7:
+        return "Italiano";
+      case 8:
+        return "Arabe";
+      case 9:
+        return "Japônes";
+      case 10:
+        return "Koreano";
+      case 11:
+        return "Cadeira de Cerimônia";
+      case 12:
+        return "Cadeira de Evento";
+    }
+  }
+
 }
