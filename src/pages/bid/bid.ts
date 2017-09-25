@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo'; 
+import { Budget } from '../../models/budget.model';
 
 @Component({
   selector: 'page-bid',
@@ -59,6 +61,20 @@ export class BidPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  showBudgetDetail(id: any){
+    let budget: Budget;
+
+    let url = this.waService.GetServiceUrl() + '/budget/get_budget/'+id;
+    this.http.get(url).subscribe(data => {
+      console.log(data.json().data);
+      budget = data.json().data;
+    }, error => {
+      this.doAlert("Erro", error.json().errors[0]);
+    });
+
+    this.navCtrl.push(BudgetStepTwoPage, {budget: budget, editable: false})
   }
 
   /*private timer;

@@ -38,8 +38,8 @@
     <ion-row>
       <ion-col center text-center>
         <ion-item>
-          <button *ngIf="auction.isAuctionActive" ion-button color="green" full>Ver Detalhes do Orçamento</button>
-          <button *ngIf="!auction.isAuctionActive" ion-button color="red" full>Ver Detalhes do Orçamento</button>
+          <button *ngIf="auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.AuctionId)" color="green" full>Ver Detalhes do Orçamento</button>
+          <button *ngIf="!auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.AuctionId)" color="red" full>Ver Detalhes do Orçamento</button>
         </ion-item>
       </ion-col>
     </ion-row>
