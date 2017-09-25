@@ -217,7 +217,7 @@ export class BudgetPage {
     if (this.pageBudget.getFilteredBudget().services.length < 1)
       this.doAlert("Erro", "Selecione ao menos um item para prosseguir com o orçamento!");
     else
-      this.navCtrl.push(BudgetStepTwoPage, { budget: this.pageBudget });
+      this.navCtrl.push(BudgetStepTwoPage, { budget: this.pageBudget.getFilteredBudget(), editable: true });
   }
 
   doAlert(title: string, message: string) {

@@ -13,6 +13,7 @@ import { TabsPage } from '../tabs/tabs'
 export class BudgetStepTwoPage {
   pageBudget: Budget;
   waService: WAService;
+  editable: boolean;
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -20,17 +21,15 @@ export class BudgetStepTwoPage {
     public http: Http) {
 
       let date = new Date();
-      date.setTime( date.getTime() + date.getTimezoneOffset()*-60*1000 ); 
-
-      
-
+      date.setTime( date.getTime() + date.getTimezoneOffset()*-60*1000+60 ); 
 
     //var n = today.toISOString();
 
     this.waService = new WAService();
     this.pageBudget = new Budget();
-    let oldBudget = navParams.get("budget");
-    this.pageBudget = oldBudget.getFilteredBudget();
+    this.pageBudget = navParams.get("budget");
+    this.editable = navParams.get("editable");
+    //this.pageBudget = oldBudget.getFilteredBudget();
     this.pageBudget.duration = date.toISOString();
 
 

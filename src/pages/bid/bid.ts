@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo'; 
+import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo';
 import { Budget } from '../../models/budget.model';
 
 @Component({
@@ -19,38 +19,38 @@ export class BidPage {
     public http: Http,
     public alertCtrl: AlertController) {
 
-      //this.StartTimer();
-      this.waService = new WAService();
+    //this.StartTimer();
+    this.waService = new WAService();
 
-      this.userType = this.waService.GetFromDbWithKey("userType");
+    this.userType = this.waService.GetFromDbWithKey("userType");
 
-      if(this.userType == 0){
+    if (this.userType == 0) {
 
-        let id = this.waService.GetFromDbWithKey("coupleId");
-  
-        let url = this.waService.GetServiceUrl() + '/budget/get_budgets_by_fiance/'+id;
-        this.http.get(url).subscribe(data => {
-          console.log(data.json().data);
-          this.auctions = data.json().data;
-          console.log(this.auctions);
-        }, error => {
-          this.doAlert("Erro", error.json().errors[0]);
-        });
-      }else{
-        let id = this.waService.GetFromDbWithKey("coupleId");
+      let id = this.waService.GetFromDbWithKey("coupleId");
 
-        //WROOOOOONG!!
+      let url = this.waService.GetServiceUrl() + '/budget/get_budgets_by_fiance/' + id;
+      this.http.get(url).subscribe(data => {
+        console.log(data.json().data);
+        this.auctions = data.json().data;
+        console.log(this.auctions);
+      }, error => {
+        this.doAlert("Erro", error.json().errors[0]);
+      });
+    } else {
+      let id = this.waService.GetFromDbWithKey("coupleId");
 
-        let url = this.waService.GetServiceUrl() + '/user/provider/'+id;
-        this.http.get(url).subscribe(data => {
-          console.log(data.json().data);
-          this.auctions = data.json().data;
-        }, error => {
-          this.doAlert("Erro", error.json().errors[0]);
-        });
-        
-      }
-      
+      //WROOOOOONG!!
+
+      let url = this.waService.GetServiceUrl() + '/user/provider/' + id;
+      this.http.get(url).subscribe(data => {
+        console.log(data.json().data);
+        this.auctions = data.json().data;
+      }, error => {
+        this.doAlert("Erro", error.json().errors[0]);
+      });
+
+    }
+
 
   }
 
@@ -63,18 +63,19 @@ export class BidPage {
     alert.present();
   }
 
-  showBudgetDetail(id: any){
+  showBudgetDetail(id: any) {
     let budget: Budget;
 
-    let url = this.waService.GetServiceUrl() + '/budget/get_budget/'+id;
+    let url = this.waService.GetServiceUrl() + '/budget/get_budget/' + id;
     this.http.get(url).subscribe(data => {
       console.log(data.json().data);
       budget = data.json().data;
+      this.navCtrl.push(BudgetStepTwoPage, { budget: budget, editable: false })
     }, error => {
       this.doAlert("Erro", error.json().errors[0]);
     });
 
-    this.navCtrl.push(BudgetStepTwoPage, {budget: budget, editable: false})
+
   }
 
   /*private timer;
