@@ -29,12 +29,10 @@ export class SearchPage {
       console.log("searching fiances");
       let url = this.waService.GetServiceUrl() + '/user/fiances'
       this.http.get(url).subscribe(data => {
-        //console.log(data.json().fiances);
         this.fianceitems = this.fiances = data.json().data.fiances;
-        console.log(this.fianceitems);
+        if (this.fianceitems.length == 0)
+          this.redirectHomePage("noivo");
 
-        if(this.fianceitems.length == 0){}
-          this.redirectHomePage("fornecedor");
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
       });
@@ -45,31 +43,29 @@ export class SearchPage {
         //console.log(data.json().fiances);
         this.provideritems = this.providers = data.json().data.providers;
         console.log(this.providers);
-        this.doAlert("Aviso","Não existe nenhum noivo cadastrado no momento");
-
-        if(this.provideritems.length == 0){}
-        this.redirectHomePage("noivo");
+        if (this.provideritems.length == 0)
+          this.redirectHomePage("fornecedor");
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
       });
     }
   }
 
-  redirectHomePage(userType: string){
-      let alert = this.alertCtrl.create({
-        title: 'Aviso',
-        message: 'Não existe nenhum '+userType+' cadastrado no momento.',
-        buttons: [
-          {
-            text: 'Voltar',
-            handler: () => {
-              this.navCtrl.setRoot(HomePage);
-              this.navCtrl.push(HomePage);
-            }
+  redirectHomePage(userType: string) {
+    let alert = this.alertCtrl.create({
+      title: 'Aviso',
+      message: 'Não existe nenhum ' + userType + ' cadastrado no momento.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            //this.navCtrl.setRoot(HomePage);
+            //this.navCtrl.push(HomePage);
           }
-        ]
-      });
-      alert.present();
+        }
+      ]
+    });
+    alert.present();
   }
 
   //ion-android-notifications

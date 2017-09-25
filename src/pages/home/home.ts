@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { WAService } from "../../providers/wa.service"
-import {  Events, AlertController, NavController } from "ionic-angular";
+import { Events, AlertController, NavController, LoadingController } from "ionic-angular";
 import { EventsService } from "../../providers/events.service";
 
 @Component({
@@ -16,13 +16,15 @@ export class HomePage {
   waService: WAService;
   greeting: string;
   email: string;
+  loader: any;
   private firstLoaded: boolean = false;
 
   constructor(public navCtrl: NavController,
-              public http: Http,
-              public alertCtrl: AlertController,
-              public events: Events,
-              public eventService: EventsService) {
+    public http: Http,
+    public alertCtrl: AlertController,
+    public events: Events,
+    public eventService: EventsService,
+    public loadingController: LoadingController) {
     this.waService = new WAService()
     this.hasAnyBid = false;
     this.userName;
@@ -36,17 +38,23 @@ export class HomePage {
   ionViewDidEnter() {
     //console.log(this.firstLoaded);
     //if (!this.firstLoaded) {
-      //this.auctions = null;
-      //this.auctions = new Object();
-      this.loadPageAndData();
+    //this.auctions = null;
+    //this.auctions = new Object();
+    this.loadPageAndData();
     //}
 
     //this.firstLoaded = true;
   }
 
 
-  loadPageAndData(){
+  loadPageAndData() {
     console.log("duplicou aqui");
+    
+    //LOADER
+    this.loader = this.loadingController.create({
+      content: "Carregando..."
+    });
+    this.loader.present();
 
     let url = this.waService.GetServiceUrl() + '/user/get_user_by_email'
     let body = JSON.stringify(this.email);
@@ -63,16 +71,19 @@ export class HomePage {
         this.userName = data.json().data.name;
         this.waService.SaveIntoDbWithKey("id", data.json().data.fianceId);
         this.waService.SaveIntoDbWithKey("coupleId", data.json().data.coupleId);
+        this.loader.dismiss();
       }
       else {
         console.log("provider");
         this.userName = data.json().data.providerName;
         this.waService.SaveIntoDbWithKey("id", data.json().data.providerId);
+        this.loader.dismiss();
       }
 
       this.waService.SaveIntoDbWithKey("userType", userType);
     }, error => {
       this.doAlert("Erro", error.json().errors[0]);
+      this.loader.dismiss();
     });
 
   }
@@ -88,14 +99,15 @@ export class HomePage {
     alert.present();
   }
 
-  getGreeting(){
+  getGreeting() {
     var myDate = new Date();
-    if ( myDate.getHours() < 12 )  {
-      this.greeting = 'bom dia!';}
-    else if ( myDate.getHours() >= 12 && myDate.getHours() <= 17 ) 
-     {    this.greeting = 'boa tarde!'; } 
-     else  if ( myDate.getHours() > 17 && myDate.getHours() <= 24 ) {  
-      this.greeting = 'boa noite!';}
+    if (myDate.getHours() < 12) {
+      this.greeting = 'bom dia!';
+    }
+    else if (myDate.getHours() >= 12 && myDate.getHours() <= 17) { this.greeting = 'boa tarde!'; }
+    else if (myDate.getHours() > 17 && myDate.getHours() <= 24) {
+      this.greeting = 'boa noite!';
+    }
   }
 
 }
