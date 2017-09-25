@@ -24,7 +24,7 @@ export class BudgetPage {
     //SERVICE BUFFET
     let service: BudgetService;
     service = new BudgetService();
-    service.serviceType = 1;
+    service.serviceType = 2;
     service.serviceName = "Buffet";
 
     //CATEGORY FOOD
@@ -32,7 +32,7 @@ export class BudgetPage {
     category = new BudgetServiceCategory();
     category.categoryName = "Comidas";
     category.categoryIcon = "pizza";
-    category.category = "1";
+    category.category = "2";
 
     console.log(category);
 
@@ -40,7 +40,7 @@ export class BudgetPage {
     let item: BudgetCategoryItem;
     item = new BudgetCategoryItem();
     item.name = "Brasileira"
-    item.type = "1";
+    item.type = "6";
 
     category.AddItems(item);
 
@@ -48,7 +48,7 @@ export class BudgetPage {
     let item2: BudgetCategoryItem;
     item2 = new BudgetCategoryItem();
     item2.name = "Italiana"
-    item2.type = "2";
+    item2.type = "7";
     item2.isSelected = true;
     category.AddItems(item2);
 
@@ -56,21 +56,21 @@ export class BudgetPage {
     let item3: BudgetCategoryItem;
     item3 = new BudgetCategoryItem();
     item3.name = "Arabe"
-    item3.type = "3";
+    item3.type = "8";
     category.AddItems(item3);
 
     //ITEM JAPANESE FOOD
     let item4: BudgetCategoryItem;
     item4 = new BudgetCategoryItem();
     item4.name = "Japonesa"
-    item4.type = "4";
+    item4.type = "9";
     category.AddItems(item4);
 
     //ITEM KOREAN FOOD
     let item5: BudgetCategoryItem;
     item5 = new BudgetCategoryItem();
     item5.name = "Koreana"
-    item5.type = "5";
+    item5.type = "10";
     category.AddItems(item5);
 
     service.AddCategory(category);
@@ -80,27 +80,27 @@ export class BudgetPage {
     category2 = new BudgetServiceCategory();
     category2.categoryName = "Bebidas";
     category2.categoryIcon = "pizza";
-    category2.category = "2";
+    category2.category = "1";
 
     //ITEM BEER
     let item8: BudgetCategoryItem;
     item8 = new BudgetCategoryItem();
     item8.name = "Cerveja"
-    item8.type = "8";
+    item8.type = "3";
     category2.AddItems(item8);
 
     //ITEM JUICE
     let item9: BudgetCategoryItem;
     item9 = new BudgetCategoryItem();
     item9.name = "Suco"
-    item9.type = "9";
+    item9.type = "4";
     category2.AddItems(item9);
 
     //ITEM BEVERAGE
     let item10: BudgetCategoryItem;
     item10 = new BudgetCategoryItem();
     item10.name = "Refrigerante"
-    item10.type = "10";
+    item10.type = "5";
     category2.AddItems(item10);
 
     service.AddCategory(category2);
@@ -110,7 +110,7 @@ export class BudgetPage {
     //SERVICE DECORATION
     let service2: BudgetService;
     service2 = new BudgetService();
-    service2.serviceType = 2;
+    service2.serviceType = 4;
     service2.serviceName = "Decoração";
 
     //CATEGORY CHAIR
@@ -124,14 +124,14 @@ export class BudgetPage {
     let item6: BudgetCategoryItem;
     item6 = new BudgetCategoryItem();
     item6.name = "Cadeira de Cerimonia"
-    item6.type = "6";
+    item6.type = "11";
     category3.AddItems(item6);
 
     //ITEM EVENT CHAIR
     let item7: BudgetCategoryItem;
     item7 = new BudgetCategoryItem();
     item7.name = "Cadeira de Evento"
-    item7.type = "7";
+    item7.type = "12";
     category3.AddItems(item7);
 
     service2.AddCategory(category3);
@@ -143,11 +143,11 @@ export class BudgetPage {
     category4.categoryIcon = "pizza";
     category4.category = "4";
 
-    //ITEM EVENT CHAIR
+    //ITEM PARTY TABLE
     let item11: BudgetCategoryItem;
     item11 = new BudgetCategoryItem();
     item11.name = "Mesa de Festa"
-    item11.type = "11";
+    item11.type = "13";
     category4.AddItems(item11);
 
     service2.AddCategory(category4);
