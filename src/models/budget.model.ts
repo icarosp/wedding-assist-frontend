@@ -17,6 +17,41 @@ export class Budget {
     GetService(name: string): BudgetService {
         return this.services.find(item => item.serviceName === name);
     }
+
+    getFilteredBudget() : Budget{
+        let filteredBudget: Budget;
+        filteredBudget = new Budget();
+
+        this.services.forEach(service => {
+            service.categories.forEach(category => {
+                category.items.forEach(item => {
+                    if (item.isSelected) {
+
+                        let bufferCategory: BudgetServiceCategory;
+                        bufferCategory = new BudgetServiceCategory();
+                        bufferCategory.categoryName = category.categoryName;
+                        bufferCategory.AddItems(item);
+
+                        let bufferService: BudgetService
+                        bufferService = new BudgetService();
+                        bufferService.AddCategory(bufferCategory);
+                        bufferService.serviceName = service.serviceName;
+
+                        if (filteredBudget.services.find(x => x.serviceName == service.serviceName) === undefined) {
+                            filteredBudget.AddService(bufferService);
+                        } else {
+                            if (filteredBudget.GetService(service.serviceName).categories.find(x => x.categoryName == category.categoryName) === undefined)
+                                filteredBudget.GetService(service.serviceName).AddCategory(category);
+                            else
+                                filteredBudget.GetService(service.serviceName).GetCategoryObject(category.categoryName).AddItems(item);
+                        }
+                    }
+                });
+            });
+        });
+
+        return filteredBudget
+    }
 }
 
 export class BudgetService {
@@ -24,6 +59,7 @@ export class BudgetService {
     serviceType: number;
     serviceName: string;
     isSelected: boolean;
+    hasSelectedItens: boolean;
 
     AddCategory(category: BudgetServiceCategory) {
         this.categories.push(category)
@@ -34,7 +70,6 @@ export class BudgetService {
     }
 
     selected() {
-        console.log("ordem chegou aqui");
         this.isSelected = !this.isSelected;
     }
 
@@ -47,11 +82,19 @@ export class BudgetService {
     selectedText() {
         if (this.isSelected)
             return "Finalizar ";
-        return "Acrescentar/Editar ";
+        return "Adicionar/Editar ";
     }
 
     GetCategory(object: any): number {
         return this.categories.indexOf(object);
+    }
+
+    GetCategoryObject(name: string): BudgetServiceCategory {
+        return this.categories.find(category => category.categoryName === name);
+    }
+
+    hasSelectedItems() {
+        this.categories.forEach((x) => { console.log(x.isSelected); if (x.isSelected) return true; });
     }
 }
 
@@ -61,7 +104,7 @@ export class BudgetServiceCategory {
     description: string;
     categoryName: string;
     categoryIcon: string;
-    iSelected: boolean;
+    isSelected: boolean;
 
     AddItems(item: BudgetCategoryItem) {
         this.items.push(item)
@@ -69,6 +112,9 @@ export class BudgetServiceCategory {
 
     constructor() {
         this.items = new Array<BudgetCategoryItem>()
+        this.isSelected = false;
+
+        this.items.forEach((x) => { console.log(x.isSelected); if (x.isSelected) this.isSelected = true; });
     }
 
     GetRightIcon() {
@@ -78,22 +124,26 @@ export class BudgetServiceCategory {
     }
 
     hasSelectedItems() {
-        if (this.items.find(x => x.isSelected === true) != null)
-            return true;
-        return false;
+        return true;//this.items.forEach((x) => { console.log(x.isSelected); if(x.isSelected) return true; });
     }
 
-    unselectAllItems(){
-        this.items.forEach(x=> x.isSelected = false);
+    unselectAllItems() {
+        this.items.forEach(x => x.isSelected = false);
     }
 
-    selectSomeItems(items: Array<string>){
+    GetSelectedItems(): BudgetCategoryItem {
+        return this.items.find(x => x.isSelected === true);
+    }
+
+    selectSomeItems(items: Array<string>) {
         //for(let item in items){
-          //  for(let itemOnThisObject in this.items){
-            //    if(item == itemOnThisObject.name)
-                    
-            //}
+        //  for(let itemOnThisObject in this.items){
+        //    if(item == itemOnThisObject.name)
+
         //}
+        //}
+
+
     }
 }
 

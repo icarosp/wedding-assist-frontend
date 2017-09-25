@@ -2,20 +2,20 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo'
 import { Budget, BudgetService, BudgetServiceCategory, BudgetCategoryItem } from '../../models/budget.model';
+import { WAService } from "../../providers/wa.service"
 
 @Component({
   selector: 'page-bid',
   templateUrl: 'budget.html'
 })
 export class BudgetPage {
-  //services: BudgetService;
   pageBudget: Budget;
-  //pageBudgetServiceCategory: BudgetServiceCategory;
+  waService: WAService;
 
   constructor(public navCtrl: NavController,
-    public alertCtrl: AlertController,
-    public budgetStepTwo: BudgetStepTwoPage) {
+    public alertCtrl: AlertController) {
     this.pageBudget = new Budget();
+    this.waService = new WAService();
 
     this.initializeServices();
   }
@@ -82,8 +82,6 @@ export class BudgetPage {
     service2.serviceName = "Decoração";
 
     this.pageBudget.AddService(service2);
-
-    console.log(this.pageBudget);
   }
 
   addItems(category: BudgetServiceCategory, service: BudgetService) {
@@ -145,8 +143,7 @@ export class BudgetPage {
   }
 
   nextStep(){
-    //let finalBudget: Budget;
-
-    this.navCtrl.push(budgetStepTwo);
+    //this.waService.SaveIntoDbWithKey("budget", this.pageBudget);
+    this.navCtrl.push(BudgetStepTwoPage, {budget: this.pageBudget});
   }
 }

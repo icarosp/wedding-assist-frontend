@@ -1,21 +1,50 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Orçamento
+      Confirmação de Orçamento
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
 
-  <div *ngFor="let service of pageBudget.services; trackBy index;">
+  <!--<div *ngFor="let service of pageBudget.services; trackBy index;">
     <ion-item-group>
       <ion-item-divider color="light">{{service.serviceName}}
-        <button ion-button item-end (click)="service.selected()">
-            {{service.selectedText()}}
-            <ion-icon name="{{service.selectedIcon()}}"></ion-icon>
-          </button>
       </ion-item-divider>
-      <div *ngIf="service.isSelected">
+          <div *ngFor="let category of service.categories; trackBy index;">
+              <ion-item-divider color="grey">{{category.categoryName}}
+              </ion-item-divider>
+              <div *ngFor="let item of category.items; trackBy index">
+                <ion-item>
+                  <ion-label>Qtd. de Pessoas - {{item.name}}</ion-label>
+                  <ion-select [(ngModel)]="item.peopleQuantity">
+                    <ion-option value="10">10</ion-option>
+                    <ion-option value="20">20</ion-option>
+                    <ion-option value="30">30</ion-option>
+                    <ion-option value="40">40</ion-option>
+                    <ion-option value="50">50</ion-option>
+                    <ion-option value="60">60</ion-option>
+                    <ion-option value="70">70</ion-option>
+                    <ion-option value="80">80</ion-option>
+                    <ion-option value="90">90</ion-option>
+                    <ion-option value="100">100</ion-option>
+                    <ion-option value="150">150</ion-option>
+                    <ion-option value="200">200</ion-option>
+                  </ion-select>
+                  <button ion-button item-end outline icon-start>
+                      <ion-icon name='md-trash'></ion-icon>
+                    </button>
+                    <button ion-button item-end outline icon-start>
+                        <ion-icon name='md-checkmark'></ion-icon>
+                      </button>
+                </ion-item>
+              </div>
+      </div>-->
+
+
+
+
+      <!--<div *ngIf="service.isSelected">
         <button ion-item *ngFor="let category of service.categories; trackBy index;" (click)="addItems(category, service)">
           {{category.categoryName}}
           <ion-icon name="{{category.categoryIcon}}" item-start color="primary"></ion-icon>
@@ -25,13 +54,13 @@
         <ion-item style="padding-left: 20%;">
           teste
         </ion-item>
-      </div>
-    </ion-item-group>
+      </div>-->
+    <!--</ion-item-group>
   </div>
 
   <ion-list>
     <ion-item>
-      <button ion-button block outline large (click)="nextStep()">Próximo Passo</button>
+      <button ion-button block outline large (click)="nextStep()">Enviar Orçamento</button>
     </ion-item>
   </ion-list>
-</ion-content>
+</ion-content>-->

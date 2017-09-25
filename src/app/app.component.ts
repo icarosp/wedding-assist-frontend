@@ -10,6 +10,7 @@ import { RegisterComponent } from "../pages/auth/register/register.component"
 import { SearchPage } from "../pages/search/search"
 import { ProfilePage } from "../pages/profile/profile"
 import { BudgetPage } from "../pages/budget/budget"
+import { BudgetStepTwoPage } from "../pages/budgetStepTwo/budgetStepTwo"
 
 
 @Component({
