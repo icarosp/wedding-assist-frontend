@@ -17,7 +17,7 @@ export class BidPage {
     public http: Http,
     public alertCtrl: AlertController) {
 
-      this.startTimer();
+      //this.StartTimer();
       this.waService = new WAService();
 
       this.userType = this.waService.GetFromDbWithKey("userType");
@@ -61,23 +61,19 @@ export class BidPage {
     alert.present();
   }
 
-  startTimer() {
-    var presentTime =  3 + ":" + 0;
-    //console.log(presentTime);
-    var timeArray: any = presentTime.split(/[:]+/);
-    var m = timeArray[0];
-    var s = this.checkSecond((timeArray[1] - 1));
-    if(s==59){m=m-1}
-    //if(m<0){alert('timer completed')}
-    
-    presentTime =
-      m + ":" + s;
-    setTimeout(this.startTimer, 1000);
-  }
-
-  checkSecond(sec) {
-    if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
-    if (sec < 0) {sec = "59"};
-    return sec;
-  }
+  /*private timer;
+  private maxTime = 20;//get this from user input in the ionic time picker and convert it to seconds maybe.
+  
+  StartTimer() {
+      this.timer = setTimeout(x => 
+         {
+           console.log(this.timer);
+             if(this.maxTime <= 0)
+             console.log("acabouu!");
+             else
+             this.maxTime -= 1;
+             this.StartTimer();
+  
+         }, 1000);
+        }*/
 }

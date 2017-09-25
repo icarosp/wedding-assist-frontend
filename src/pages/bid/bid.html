@@ -7,12 +7,9 @@
 </ion-header>
 
 <ion-content>
-
-    <div>Time left = <span id="timer"></span></div>
   <ion-card *ngFor="let auction of auctions; trackBy index;">
     <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
       <ion-label text-left>EM ANDAMENTO</ion-label>
-      <ion-label text-right> <timer #timer [timeInSeconds]="60"></timer> restantes</ion-label>
     </ion-item-divider>
     <ion-item-divider color="red" text-center *ngIf="!auction.isAuctionActive">
       <ion-label text-left>ENCERRADO</ion-label>
