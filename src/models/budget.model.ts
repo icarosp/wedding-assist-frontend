@@ -19,7 +19,7 @@ export class Budget {
         return this.services.find(item => item.serviceName === name);
     }
 
-    getFilteredBudget() : Budget{
+    getFilteredBudget(): Budget {
         let filteredBudget: Budget;
         filteredBudget = new Budget();
 
@@ -136,8 +136,25 @@ export class BudgetServiceCategory {
         this.items.forEach(x => x.isSelected = false);
     }
 
-    GetSelectedItems(): BudgetCategoryItem {
-        return this.items.find(x => x.isSelected === true);
+    GetSelectedItems(): any {
+        let teste: Array<BudgetCategoryItem>;
+        console.log("ao menos tentou");
+
+        teste = new Array<BudgetCategoryItem>();
+
+        this.items.forEach((x) => {
+            if (x.isSelected)
+              teste.push(x);
+        });
+
+        return teste;
+
+
+
+
+        //if (this.items.find(x => x.isSelected === true) != undefined)
+            //return this.items.find(x => x.isSelected === true);
+        //return new BudgetCategoryItem();
     }
 
     selectSomeItems(items: Array<string>) {

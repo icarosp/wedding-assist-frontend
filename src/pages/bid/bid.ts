@@ -68,7 +68,6 @@ export class BidPage {
 
     let url = this.waService.GetServiceUrl() + '/budget/get_budget/' + id;
     this.http.get(url).subscribe(data => {
-      console.log(data.json().data);
       budget = data.json().data;
       this.navCtrl.push(BudgetStepTwoPage, { budget: budget, editable: false })
     }, error => {

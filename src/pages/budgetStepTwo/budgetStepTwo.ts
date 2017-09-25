@@ -70,4 +70,13 @@ export class BudgetStepTwoPage {
     });
     alert.present();
   }
+
+  GetServiceName(id: number){
+    switch (id) {
+      case 2:
+        return "Buffet";
+      case 4:
+        return "Decoração";
+    }
+  }
 }
