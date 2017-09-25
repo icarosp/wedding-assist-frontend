@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Confirmação de Orçamento
+      Orçamento
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -17,7 +17,7 @@
         <div *ngFor="let item of category.items; trackBy index; let last = last">
           <ion-item>
             <ion-label>Qtd. de Pessoas - {{item.name}}</ion-label>
-            <ion-select [(ngModel)]="item.peopleQuantity">
+            <ion-select [(ngModel)]="item.peopleQuantity" [disabled]="editable">
               <ion-option value="10">10</ion-option>
               <ion-option value="20">20</ion-option>
               <ion-option value="30">30</ion-option>
@@ -34,7 +34,7 @@
           </ion-item>
           <ion-item>
             <ion-label>Descrição</ion-label>
-            <ion-input [(ngModel)]="item.description" style="height: 50px;" type="text"></ion-input>
+            <ion-input [(ngModel)]="item.description" style="height: 50px;" type="text" [disabled]="editable"></ion-input>
           </ion-item>
           <ion-item-divider *ngIf="!last" color="grey"></ion-item-divider>
         </div>
@@ -45,11 +45,12 @@
     <ion-item-divider color="grey"></ion-item-divider>
     <ion-item>
       <ion-label>Fim do Leilão</ion-label>
-      <ion-datetime min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="pageBudget.duration"></ion-datetime>
+      <ion-datetime min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="pageBudget.duration" [disabled]="editable"></ion-datetime>
     </ion-item>
     <ion-item-divider color="grey"></ion-item-divider>
     <ion-item>
-      <button ion-button block outline large (click)="sendBudget(myDate)">Enviar Orçamento</button>
+      <button *ngIf="!editable" ion-button block outline large (click)="sendBudget(myDate)">Enviar Orçamento</button>
+      <button *ngIf="editable" ion-button block outline large (click)="backToBidPage()">Voltar</button>
     </ion-item>
   </ion-item-group>
 </ion-content>

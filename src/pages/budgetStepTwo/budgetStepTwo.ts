@@ -28,7 +28,7 @@ export class BudgetStepTwoPage {
     this.waService = new WAService();
     this.pageBudget = new Budget();
     this.pageBudget = navParams.get("budget");
-    this.editable = navParams.get("editable");
+    this.editable = !navParams.get("editable");
     //this.pageBudget = oldBudget.getFilteredBudget();
     this.pageBudget.duration = date.toISOString();
 
@@ -56,6 +56,10 @@ export class BudgetStepTwoPage {
     }, error => {
       this.doAlert("Erro", error.json().errors[0]);
     });
+  }
+
+  backToBidPage(){
+    this.navCtrl.pop();
   }
 
   doAlert(title: string, message: string) {
