@@ -44,21 +44,14 @@
   <ion-item-group>
     <ion-item-divider color="grey"></ion-item-divider>
     <ion-item>
-        <ion-label>Fim do Leilão</ion-label>
-        <ion-datetime min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="myDate"></ion-datetime>
-      </ion-item>
-      <ion-item-divider color="grey"></ion-item-divider>
-    <ion-item>
-      <button ion-button block outline large (click)="nextStep()">Enviar Orçamento</button>
+      <ion-label>Fim do Leilão</ion-label>
+      <ion-datetime min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="myDate"></ion-datetime>
     </ion-item>
-    
+    <ion-item-divider color="grey"></ion-item-divider>
+    <ion-item>
+      <button ion-button block outline large (click)="sendBudget()">Enviar Orçamento</button>
+    </ion-item>
   </ion-item-group>
-
-
-
-  <ion-list>
-
-  </ion-list>
 </ion-content>
 
 

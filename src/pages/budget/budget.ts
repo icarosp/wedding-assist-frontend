@@ -89,7 +89,7 @@ export class BudgetPage {
     item9 = new BudgetCategoryItem();
     item9.name = "Suco"
     item9.type = "9";
-    category2.AddItems(item4);
+    category2.AddItems(item9);
 
     //ITEM BEVERAGE
     let item10: BudgetCategoryItem;
@@ -135,6 +135,13 @@ export class BudgetPage {
     category4 = new BudgetServiceCategory();
     category4.categoryName = "Mesa";
     category4.categoryIcon = "pizza";
+
+    //ITEM EVENT CHAIR
+    let item11: BudgetCategoryItem;
+    item11 = new BudgetCategoryItem();
+    item11.name = "Mesa de Festa"
+    item11.type = "11";
+    category4.AddItems(item11);
 
     service2.AddCategory(category4);
 
