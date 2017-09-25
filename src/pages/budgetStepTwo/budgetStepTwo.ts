@@ -71,7 +71,9 @@ export class BudgetStepTwoPage {
     alert.present();
   }
 
-  GetServiceName(id: number){
+  getServiceName(id: any){
+    console.log(id);
+
     switch (id) {
       case 2:
         return "Buffet";

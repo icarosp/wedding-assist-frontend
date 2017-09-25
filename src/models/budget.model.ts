@@ -101,6 +101,15 @@ export class BudgetService {
     hasSelectedItems() {
         this.categories.forEach((x) => { console.log(x.isSelected); if (x.isSelected) return true; });
     }
+
+    getServiceName(id: number){
+        switch (id) {
+          case 2:
+            return "Buffet";
+          case 4:
+            return "Decoração";
+        }
+      }
 }
 
 export class BudgetServiceCategory {
