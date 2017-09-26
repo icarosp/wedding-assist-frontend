@@ -31,11 +31,6 @@ export class BudgetStepTwoPage {
     this.editable = !navParams.get("editable");
     //this.pageBudget = oldBudget.getFilteredBudget();
     this.pageBudget.duration = date.toISOString();
-
-
-
-
-    console.log(this.pageBudget);
   }
 
   sendBudget(duration: any) {
@@ -108,7 +103,7 @@ export class BudgetStepTwoPage {
       case 8:
         return "Arabe";
       case 9:
-        return "Japônes";
+        return "Japonês";
       case 10:
         return "Koreano";
       case 11:

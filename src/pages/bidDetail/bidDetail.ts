@@ -4,6 +4,7 @@ import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo';
 import { Budget } from '../../models/budget.model';
+import {TabsPage} from '../tabs/tabs';
 
 @Component({
   selector: 'page-bid',
@@ -45,6 +46,7 @@ export class BidDetail {
     this.http.post(url, body, options).subscribe(data => {
       console.log(data);
             this.doAlert("Aviso","Dados salvos com sucesso!");
+            this.navCtrl.push(TabsPage);
     }, error => {
         this.doAlert("Erro",error.json().errors[0]);
     });
