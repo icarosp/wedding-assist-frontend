@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { Budget, BudgetService, BudgetServiceCategory, BudgetCategoryItem } from '../../models/budget.model';
 import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -14,14 +14,16 @@ export class BudgetStepTwoPage {
   pageBudget: Budget;
   waService: WAService;
   editable: boolean;
+  loader: any;
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
     public navParams: NavParams,
-    public http: Http) {
+    public http: Http,
+    public loadingController: LoadingController) {
 
     let date = new Date();
-    date.setTime(date.getTime() + date.getTimezoneOffset() * -60 * 1000 + 60);
+    date.setTime(date.getTime() + date.getTimezoneOffset() * -60 * 1060 + 60);
 
     //var n = today.toISOString();
 
@@ -34,6 +36,14 @@ export class BudgetStepTwoPage {
   }
 
   sendBudget(duration: any) {
+    
+    //LOADER
+    this.loader = this.loadingController.create({
+    content: "Carregando..."
+     });
+    this.loader.present();
+
+
     //adding auction duration
     //this.pageBudget.duration = '2017-08-09';
     this.pageBudget.coupleId = this.waService.GetFromDbWithKey("coupleId");
@@ -47,9 +57,11 @@ export class BudgetStepTwoPage {
 
     this.http.post(url, body, options).subscribe(data => {
       this.doAlert("Aviso", "Dados salvos com sucesso!");
+      this.loader.dismiss();
       this.navCtrl.push(TabsPage);
     }, error => {
       this.doAlert("Erro", error.json().errors[0]);
+      this.loader.dismiss();
     });
   }
 

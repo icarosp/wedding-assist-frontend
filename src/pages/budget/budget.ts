@@ -133,7 +133,7 @@ export class BudgetPage {
     //ITEM CERIMONY CHAIR
     let item6: BudgetCategoryItem;
     item6 = new BudgetCategoryItem();
-    item6.name = "Cadeira de Cerimonia"
+    item6.name = "Cadeira de Cerimônia"
     item6.type = "11";
     category3.AddItems(item6);
 

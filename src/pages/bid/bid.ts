@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, NavController, LoadingController } from 'ionic-angular';
 import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo';
@@ -20,10 +20,12 @@ export class BidPage {
   bidTypeProvider: string;
   auctionsBeforeFilterFiance: any;
   auctionsBeforeFilterProvider: any;
+  loader: any;
 
   constructor(public navCtrl: NavController,
     public http: Http,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public loadingController: LoadingController) {
 
     this.bidType = "ALL";
     this.bidTypeProvider = "ALL";
@@ -33,17 +35,24 @@ export class BidPage {
   }
 
   ionViewDidEnter() {
+    //LOADER
+    this.loader = this.loadingController.create({
+      content: "Carregando..."
+    });
+    this.loader.present();
+
+
     //FIANCE
     if (this.userType == 0) {
       let id = this.waService.GetFromDbWithKey("coupleId");
 
       let url = this.waService.GetServiceUrl() + '/budget/get_budgets_by_fiance/' + id;
       this.http.get(url).subscribe(data => {
-        console.log(data.json().data);
+        this.loader.dismiss();
         this.auctionsBeforeFilterFiance = this.auctionsFiance = data.json().data;
-        console.log(this.auctionsFiance);
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
+        this.loader.dismiss();
       });
       //PROVIDER
     } else {
@@ -51,10 +60,11 @@ export class BidPage {
 
       let url = this.waService.GetServiceUrl() + '/budget/get_budgets_by_provider/' + id;
       this.http.get(url).subscribe(data => {
-        console.log(data.json().data);
         this.auctionsBeforeFilterProvider = this.auctionsProvider = data.json().data;
+        this.loader.dismiss();
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
+        this.loader.dismiss();
       });
     }
   }
