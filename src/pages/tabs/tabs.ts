@@ -24,10 +24,18 @@ export class TabsPage {
 
   constructor() {
     this.waService = new WAService()
+    
+        if (this.waService.GetFromDbWithKey("userType") === 1)
+          this.isProvider = true;
+        console.log(this.isProvider);
+  }
 
-    if (this.waService.GetFromDbWithKey("userType") === 1)
-      this.isProvider = true;
-    console.log(this.isProvider);
+  ionViewDidEnter() {
+    this.waService = new WAService()
+    
+        if (this.waService.GetFromDbWithKey("userType") === 1)
+          this.isProvider = true;
+        console.log(this.isProvider);
   }
 
 
