@@ -5,9 +5,11 @@
       </ion-title>
     </ion-navbar>
   </ion-header>
+
+
   <ion-content>
   
-    <div *ngFor="let service of pageBudget.services; trackBy index;">
+    <div *ngFor="let service of bid.services; trackBy index;">
       <ion-item-group>
         <ion-item-divider *ngIf="!editable" color="light"><b>{{service.serviceName}}</b></ion-item-divider>
         <ion-item-divider *ngIf="editable" color="light">{{getServiceName(service.serviceType)}}</ion-item-divider>
@@ -46,12 +48,6 @@
       </ion-item-group>
     </div>
     <ion-item-group>
-      <ion-item-divider color="grey"></ion-item-divider>
-      <ion-item>
-        <ion-label>Fim do Leilão</ion-label>
-        <ion-datetime *ngIf="!editable" min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="pageBudget.duration" [disabled]="editable"></ion-datetime>
-        <ion-datetime *ngIf="editable" min="2017-09-25" displayFormat="DD MM YYYY, HH:mm" [(ngModel)]="pageBudget.duration" [disabled]="editable"></ion-datetime>
-      </ion-item>
       <ion-item-divider color="grey"></ion-item-divider>
       <ion-item>
         <button *ngIf="!editable" ion-button block outline large (click)="sendBudget(myDate)">Enviar Orçamento</button>
