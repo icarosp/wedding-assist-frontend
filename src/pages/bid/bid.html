@@ -37,7 +37,7 @@
         <h2>Usuário: {{auction.userName}}</h2>
         <h2>Data de Criação: {{auction.formatedCreationDate}}</h2>
         <h2>Data de Expiração: {{auction.formatedEndDate}}</h2>
-        <h2>Quantidade de Lances: {{auction.numberOfBids}}</h2>
+        <!--<h2>Quantidade de Lances: {{auction.numberOfBids.lenght}}</h2>-->
       </ion-card-content>
 
       <ion-row>
@@ -87,7 +87,7 @@
 
       <ion-item-group>
         <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
-          Lances
+            <ion-icon name="logo-usd" item-end></ion-icon>{{auction.bids.lenght}} Lances até o momento <ion-icon name="logo-usd" item-end></ion-icon>
         </ion-item-divider>
         <ion-item-divider color="red" text-center *ngIf="!auction.isAuctionActive">
           Lances

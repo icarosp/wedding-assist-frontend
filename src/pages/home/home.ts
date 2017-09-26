@@ -49,11 +49,11 @@ export class HomePage {
 
   loadPageAndData() {
     console.log("duplicou aqui");
-    
+
     //LOADER
     //this.loader = this.loadingController.create({
-      //content: "Carregando..."
-   // });
+    //content: "Carregando..."
+    // });
     //this.loader.present();
 
     let url = this.waService.GetServiceUrl() + '/user/get_user_by_email'
@@ -102,11 +102,11 @@ export class HomePage {
   getGreeting() {
     var myDate = new Date();
     if (myDate.getHours() < 12) {
-      this.greeting = 'bom dia!';
+      this.greeting = 'Bom dia ';
     }
-    else if (myDate.getHours() >= 12 && myDate.getHours() <= 17) { this.greeting = 'boa tarde!'; }
+    else if (myDate.getHours() >= 12 && myDate.getHours() <= 17) { this.greeting = 'Boa tarde '; }
     else if (myDate.getHours() > 17 && myDate.getHours() <= 24) {
-      this.greeting = 'boa noite!';
+      this.greeting = 'Boa noite ';
     }
   }
 
