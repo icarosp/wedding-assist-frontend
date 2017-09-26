@@ -23,11 +23,15 @@ export class Budget {
         let filteredBudget: Budget;
         filteredBudget = new Budget();
 
+        console.log(this.services);
+
         this.services.forEach(service => {
             service.categories.forEach(category => {
                 category.items.forEach(item => {
+                    
+                    //IS ITEM SELECTED
                     if (item.isSelected) {
-
+                        console.log(item);
                         console.log(category);
 
                         let bufferCategory: BudgetServiceCategory;
@@ -46,7 +50,7 @@ export class Budget {
                             filteredBudget.AddService(bufferService);
                         } else {
                             if (filteredBudget.GetService(service.serviceName).categories.find(x => x.categoryName == category.categoryName) === undefined)
-                                filteredBudget.GetService(service.serviceName).AddCategory(category);
+                                filteredBudget.GetService(service.serviceName).AddCategory(bufferCategory);
                             else
                                 filteredBudget.GetService(service.serviceName).GetCategoryObject(category.categoryName).AddItems(item);
                         }

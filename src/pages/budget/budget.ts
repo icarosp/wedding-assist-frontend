@@ -170,7 +170,6 @@ export class BudgetPage {
     alert.setTitle('Selecione quais tipos de ' + category.categoryName + ' você deseja acresentar no orçamento');
 
     for (let item of category.items) {
-
       alert.addInput({
         type: 'checkbox',
         label: item.name,
@@ -184,12 +183,6 @@ export class BudgetPage {
       text: 'Salvar',
       handler: data => {
 
-        if (data.lengt > 0) {
-          console.log("nao tem nada");
-        }
-        else {
-          console.log("tem algo");
-        }
         console.log(data);
 
         let hasSomethingOnThisCategory: boolean;
@@ -198,6 +191,7 @@ export class BudgetPage {
         for (let itemSelect of data) {
           for (let itemOnCategory of category.items) {
             if (itemSelect == itemOnCategory.type) {
+              console.log("tem item "+itemOnCategory.type);
               itemOnCategory.isSelected = true;
               hasSomethingOnThisCategory = true;
             }
@@ -217,6 +211,8 @@ export class BudgetPage {
           //EXCLUDE CATEGORY WHICH HAS NO ITEM OR OLD ITEMS SELECTED
           this.pageBudget.GetService(service.serviceName).categories[index].unselectAllItems();
         }
+
+        console.log(this.pageBudget);
       }
     });
 
