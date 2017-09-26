@@ -21,10 +21,12 @@ export class SearchPage {
     public http: Http,
     public alertCtrl: AlertController) {
     this.waService = new WAService()
-    this.type = this.waService.GetFromDbWithKey("userType");
+   
   }
 
   ionViewDidEnter() {
+    this.type = this.waService.GetFromDbWithKey("userType");
+
     if (this.type == "1") {
       console.log("searching fiances");
       let url = this.waService.GetServiceUrl() + '/user/fiances'

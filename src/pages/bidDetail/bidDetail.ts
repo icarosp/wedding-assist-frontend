@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo';
@@ -15,12 +15,14 @@ export class BidDetail {
   controler: any;
   bid: any;
   editable: boolean;
+  loader: any;
 
 
   constructor(public navCtrl: NavController,
     public http: Http,
     public navParams: NavParams,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public loadingController: LoadingController) {
     this.waService = new WAService();
 
     //online till load the full page
@@ -30,7 +32,7 @@ export class BidDetail {
   ionViewDidEnter() {
     this.bid = this.navParams.get("bid");
     this.editable = !this.navParams.get("editable");
-    
+
     console.log(this.bid);
   }
 
@@ -78,6 +80,22 @@ export class BidDetail {
       case 4:
         return "Decoração";
     }
+  }
+
+  chooseAsWinner(){
+    let url = this.waService.GetServiceUrl() + '/big/chooseBid/';
+    let body = JSON.stringify({id: this.bid.id});
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    this.http.post(url, body, options).subscribe(data => {
+      this.doAlert("Aviso", "Dados salvos com sucesso!");
+      this.loader.dismiss();
+      this.navCtrl.push(TabsPage);
+    }, error => {
+      this.doAlert("Erro", error.json().errors[0]);
+      this.loader.dismiss();
+    });
   }
 
   getCategoryName(id: any) {
