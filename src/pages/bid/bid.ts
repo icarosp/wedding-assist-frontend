@@ -116,8 +116,6 @@ export class BidPage {
   }
 
   getNumberOfBids(bids: any) {
-    console.log(bids);
-
     if (bids.length === 0)
       return "Nenhum lance"
     else if (bids.length === 1)
@@ -127,8 +125,6 @@ export class BidPage {
   }
 
   getAuctionColor(active: boolean) {
-    console.log("não");
-
     if (active)
       return "green";
     else
