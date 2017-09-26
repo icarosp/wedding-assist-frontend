@@ -3,6 +3,7 @@ import { NavController, AlertController } from 'ionic-angular';
 import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo'
 import { Budget, BudgetService, BudgetServiceCategory, BudgetCategoryItem } from '../../models/budget.model';
 import { WAService } from "../../providers/wa.service"
+import { HomePage } from "../../pages/home/home"
 
 @Component({
   selector: 'page-bid',
@@ -22,6 +23,14 @@ export class BudgetPage {
   }
 
   ionViewDidEnter() {
+
+    if(this.waService.GetFromDbWithKey("userType")){
+      this.doAlert("Erro", "Não é permitido fornecedores solicitarem orçamentos.");
+      this.navCtrl.push(HomePage);      
+    }
+    
+
+
     if (!this.firstLoaded) {
       this.pageBudget = null;
       this.pageBudget = new Budget();

@@ -23,7 +23,8 @@ export class BudgetStepTwoPage {
     public loadingController: LoadingController) {
 
     let date = new Date();
-    date.setTime(date.getTime() + date.getTimezoneOffset() * -60 * 1060 + 60);
+    date.setTime(date.getTime() + date.getTimezoneOffset() * -60 * 1000 + 60);
+    date.setSeconds(date.getSeconds() + 180);
 
     //var n = today.toISOString();
 
