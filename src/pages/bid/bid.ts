@@ -49,7 +49,7 @@ export class BidPage {
     } else {
       let id = this.waService.GetFromDbWithKey("id");
 
-      let url = 'http://prod-wa-back.us-east-1.elasticbeanstalk.com/api/budget/get_budgets_by_provider/'+ id;//this.waService.GetServiceUrl() + '/budget/get_budgets_by_provider/' + id;
+      let url = 'http://prod-wa-back.us-east-1.elasticbeanstalk.com/api/budget/get_budgets_by_provider/' + id;//this.waService.GetServiceUrl() + '/budget/get_budgets_by_provider/' + id;
       this.http.get(url).subscribe(data => {
         console.log(data.json().data);
         this.auctionsBeforeFilterProvider = this.auctionsProvider = data.json().data;
@@ -87,7 +87,7 @@ export class BidPage {
     this.http.get(url).subscribe(data => {
       budget = data.json().data;
       console.log(budget);
-      this.navCtrl.push(BidDetail, { bid: budget, editable: true});
+      this.navCtrl.push(BidDetail, { bid: budget, editable: true });
     }, error => {
       this.doAlert("Erro", error.json().errors[0]);
     });
@@ -113,5 +113,16 @@ export class BidPage {
     else {
       this.auctionsProvider = this.auctionsBeforeFilterProvider;
     }
+  }
+
+  getNumberOfBids(bids: any) {
+    console.log(bids);
+
+    if (bids.length === 0)
+      return "Nenhum lance"
+    else if (bids.length === 1)
+      return bids.length + " lance"
+    else
+      return bids.length + " lances"
   }
 }

@@ -43,10 +43,9 @@
       <ion-row>
         <ion-col center text-center>
           <ion-item>
-            <button *ngIf="auction.isAuctionActive" ion-button (click)="makeOffer(auction.budgetId)" color="green"
-              full>Fazer Oferta</button>
-            <button *ngIf="!auction.isAuctionActive" [disabled]="!auction.isAuctionActive" ion-button (click)="makeOffer(auction.budgetId)" color="red"
-              full>Fazer Oferta</button>
+            <button *ngIf="auction.isAuctionActive" ion-button (click)="makeOffer(auction.budgetId)" color="green" full>Fazer Oferta</button>
+            <button *ngIf="!auction.isAuctionActive" [disabled]="!auction.isAuctionActive" ion-button (click)="makeOffer(auction.budgetId)"
+              color="red" full>Fazer Oferta</button>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -87,13 +86,34 @@
 
       <ion-item-group>
         <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
-            <ion-icon name="logo-usd" item-end></ion-icon>{{auction.bids.lenght}} Lances até o momento <ion-icon name="logo-usd" item-end></ion-icon>
+          <ion-icon name="logo-usd" item-end></ion-icon>{{auction.bids.lenght}} Lances até o momento
+          <ion-icon name="logo-usd" item-end></ion-icon>
         </ion-item-divider>
         <ion-item-divider color="red" text-center *ngIf="!auction.isAuctionActive">
-          Lances
+          {{getNumberOfBids(auction.bids)}} até o momento
+          <ion-icon name="logo-usd" item-end></ion-icon>
+          <ion-icon name="logo-usd" item-start></ion-icon>
         </ion-item-divider>
-        <button ion-item>
-          Nenhum lance até o momento!
+        <button ion-item *ngFor="let bid of auction.bids; trackBy index;" ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-8>
+                  {{bid.providerName}}
+              </ion-col>
+              <ion-col col-4>
+                  <ion-badge text-top color="primary" item-top item-right>{{bid.position}}</ion-badge>
+              </ion-col>
+            </ion-row>
+          <ion-row>
+              <ion-col col-8>
+                  {{bid.formatedBidTime}}
+              </ion-col>
+              <ion-col col-4>
+                  <ion-badge text-top color="primary" item-top item-right>{{bid.formatedAmount}}</ion-badge>
+              </ion-col>
+          </ion-row>
+          </ion-grid>
+          <hr>
         </button>
         <hr>
       </ion-item-group>
@@ -101,10 +121,8 @@
       <ion-row>
         <ion-col center text-center>
           <ion-item>
-            <button *ngIf="auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.budgetId)" color="green"
-              full>Ver Detalhes do Orçamento</button>
-            <button *ngIf="!auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.budgetId)" color="red"
-              full>Ver Detalhes do Orçamento</button>
+            <button *ngIf="auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.budgetId)" color="green" full>Ver Detalhes do Orçamento</button>
+            <button *ngIf="!auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.budgetId)" color="red" full>Ver Detalhes do Orçamento</button>
           </ion-item>
         </ion-col>
       </ion-row>
