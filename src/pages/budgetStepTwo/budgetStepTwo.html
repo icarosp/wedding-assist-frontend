@@ -9,7 +9,7 @@
 
   <div *ngFor="let service of pageBudget.services; trackBy index;">
     <ion-item-group>
-      <ion-item-divider *ngIf="!editable" color="light">{{service.serviceName}}</ion-item-divider>
+      <ion-item-divider *ngIf="!editable" color="light"><b>{{service.serviceName}}</b></ion-item-divider>
       <ion-item-divider *ngIf="editable" color="light">{{getServiceName(service.serviceType)}}</ion-item-divider>
 
       <div *ngFor="let category of service.categories; trackBy index;">

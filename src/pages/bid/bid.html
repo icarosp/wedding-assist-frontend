@@ -7,6 +7,20 @@
 </ion-header>
 
 <ion-content>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="bidType" (ionChange)="filterBid()" color="primary">
+            <ion-segment-button value="ALL">
+                TODOS
+            </ion-segment-button>
+            <ion-segment-button value="CLOSED">
+                ENCERRADOS
+            </ion-segment-button>
+            <ion-segment-button value="OPENED">
+                EM ANDAMENTO
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
   <ion-card *ngFor="let auction of auctions; trackBy index;">
     <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
       <ion-label text-left>EM ANDAMENTO</ion-label>

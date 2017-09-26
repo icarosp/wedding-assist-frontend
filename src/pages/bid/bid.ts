@@ -14,10 +14,14 @@ export class BidPage {
   auctions: any;
   userType: any;
   controler: any;
+  bidType: string;
+  auctionsBeforeFilter: any;
 
   constructor(public navCtrl: NavController,
     public http: Http,
     public alertCtrl: AlertController) {
+
+    this.bidType = "ALL";
 
     //this.StartTimer();
     this.waService = new WAService();
@@ -31,7 +35,7 @@ export class BidPage {
       let url = this.waService.GetServiceUrl() + '/budget/get_budgets_by_fiance/' + id;
       this.http.get(url).subscribe(data => {
         console.log(data.json().data);
-        this.auctions = data.json().data;
+        this.auctionsBeforeFilter = this.auctions = data.json().data;
         console.log(this.auctions);
       }, error => {
         this.doAlert("Erro", error.json().errors[0]);
@@ -73,8 +77,22 @@ export class BidPage {
     }, error => {
       this.doAlert("Erro", error.json().errors[0]);
     });
+  }
+
+  filterBid() {
+    console.log("entrou aqui");
+    console.log(this.bidType);
 
 
+    if (this.bidType == "CLOSED") {
+      this.auctions = this.auctionsBeforeFilter.filter(x => x.isAuctionActive === false);
+    }
+    else if (this.bidType == "OPENED")
+
+      this.auctions = this.auctionsBeforeFilter.filter(x => x.isAuctionActive === true);
+    else {
+      this.auctions = this.auctionsBeforeFilter;
+    }
   }
 
   /*private timer;
