@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { WAService } from "../../providers/wa.service"
 import { Events, AlertController, NavController, LoadingController } from "ionic-angular";
 import { EventsService } from "../../providers/events.service";
+import { LoginComponent } from "../auth/login/login.component"
 
 @Component({
   selector: 'page-home',
@@ -88,6 +89,10 @@ export class HomePage {
 
   }
 
+  logout(){
+    this.navCtrl.setRoot(LoginComponent);
+    this.navCtrl.push(LoginComponent);
+  }
 
 
   doAlert(title: string, message: string) {

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { Events, MenuController, NavController, Platform} from "ionic-angular";
+import { Events, MenuController, NavController, Platform } from "ionic-angular";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AwsUtil } from "../providers/aws.service";
@@ -26,22 +26,21 @@ export class MyApp {
   public rootPage: any;
 
   constructor(public platform: Platform,
-              public statusBar: StatusBar,
-              public splashScreen: SplashScreen,
-              public events: Events,
-              public awsUtil: AwsUtil,
-              public menu: MenuController
-              ) 
-    {
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public events: Events,
+    public awsUtil: AwsUtil,
+    public menu: MenuController
+  ) {
 
 
     platform.ready().then(() => {
       console.log("Initialized Aws Service");
       this.awsUtil.initAwsService();
-  
+
       console.log("Set login component as root");
-      this.rootPage = LoginComponent;
-  
+      this.rootPage = TabsPage;
+
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
@@ -56,19 +55,19 @@ export class MyApp {
 
     // close the menu when clicking a link from the menu
     this.menu.close();
-}
+  }
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      console.log("evento subscribe login");  
+      console.log("evento subscribe login");
       //this.enableMenu(true);
     });
   }
 
-    enableMenu(loggedIn) {
-console.log(loggedIn);
+  enableMenu(loggedIn) {
+    console.log(loggedIn);
 
-      this.menu.enable(loggedIn, 'loggedInMenu');
-      this.menu.enable(!loggedIn, 'loggedOutMenu');
+    this.menu.enable(loggedIn, 'loggedInMenu');
+    this.menu.enable(!loggedIn, 'loggedOutMenu');
   }
 }
