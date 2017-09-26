@@ -9,6 +9,7 @@ import { BidPage } from '../pages/bid/bid';
 import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { BidDetail } from '../pages/bidDetail/bidDetail';
 import { EventsService } from "../providers/events.service";
 import { LoginComponent } from "../pages/auth/login/login.component";
 import { ForgotPasswordStep1Component } from "../pages/auth/forgotpassword/forgotPassword1.component";
@@ -38,6 +39,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ConfirmRegistrationComponent,
     BudgetPage,
     SearchPage,
+    BidDetail,
     BudgetStepTwoPage,
     ResendCodeComponent
   ],
@@ -60,6 +62,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ConfirmRegistrationComponent,
     BudgetPage,
     SearchPage,
+    BidDetail,
     BudgetStepTwoPage,
     ResendCodeComponent
   ],

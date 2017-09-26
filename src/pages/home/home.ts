@@ -51,10 +51,10 @@ export class HomePage {
     console.log("duplicou aqui");
     
     //LOADER
-    this.loader = this.loadingController.create({
-      content: "Carregando..."
-    });
-    this.loader.present();
+    //this.loader = this.loadingController.create({
+      //content: "Carregando..."
+   // });
+    //this.loader.present();
 
     let url = this.waService.GetServiceUrl() + '/user/get_user_by_email'
     let body = JSON.stringify(this.email);
@@ -71,19 +71,19 @@ export class HomePage {
         this.userName = data.json().data.name;
         this.waService.SaveIntoDbWithKey("id", data.json().data.fianceId);
         this.waService.SaveIntoDbWithKey("coupleId", data.json().data.coupleId);
-        this.loader.dismiss();
+        //this.loader.dismiss();
       }
       else {
         console.log("provider");
         this.userName = data.json().data.providerName;
         this.waService.SaveIntoDbWithKey("id", data.json().data.providerId);
-        this.loader.dismiss();
+        //this.loader.dismiss();
       }
 
       this.waService.SaveIntoDbWithKey("userType", userType);
     }, error => {
       this.doAlert("Erro", error.json().errors[0]);
-      this.loader.dismiss();
+      //this.loader.dismiss();
     });
 
   }

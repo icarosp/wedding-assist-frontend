@@ -11,6 +11,7 @@ import { SearchPage } from "../pages/search/search"
 import { ProfilePage } from "../pages/profile/profile"
 import { BudgetPage } from "../pages/budget/budget"
 import { BudgetStepTwoPage } from "../pages/budgetStepTwo/budgetStepTwo"
+import { BidPage } from "../pages/bid/bid"
 
 
 @Component({
@@ -39,7 +40,7 @@ export class MyApp {
       this.awsUtil.initAwsService();
   
       console.log("Set login component as root");
-      this.rootPage = TabsPage;
+      this.rootPage = BidPage;
   
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

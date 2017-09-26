@@ -22,9 +22,9 @@ export class SearchPage {
     public alertCtrl: AlertController) {
     this.waService = new WAService()
     this.type = this.waService.GetFromDbWithKey("userType");
+  }
 
-    console.log("vezes no construtor");
-
+  ionViewDidEnter() {
     if (this.type == "1") {
       console.log("searching fiances");
       let url = this.waService.GetServiceUrl() + '/user/fiances'

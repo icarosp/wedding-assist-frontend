@@ -7,57 +7,69 @@
 </ion-header>
 
 <ion-content>
-    <ion-toolbar>
-        <ion-segment [(ngModel)]="bidType" (ionChange)="filterBid()" color="primary">
-            <ion-segment-button value="ALL">
-                TODOS
-            </ion-segment-button>
-            <ion-segment-button value="CLOSED">
-                ENCERRADOS
-            </ion-segment-button>
-            <ion-segment-button value="OPENED">
-                EM ANDAMENTO
-            </ion-segment-button>
-        </ion-segment>
-    </ion-toolbar>
+  
+  <!-- PROVIDER -->
+  <div>
 
-  <ion-card *ngFor="let auction of auctions; trackBy index;">
-    <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
-      <ion-label text-left>EM ANDAMENTO</ion-label>
-    </ion-item-divider>
-    <ion-item-divider color="red" text-center *ngIf="!auction.isAuctionActive">
-      <ion-label text-left>ENCERRADO</ion-label>
-      <ion-label text-right></ion-label>  restantes
-    </ion-item-divider>
+  </div>
 
-    <ion-card-content padding style="padding-top: 3%;">
-      <h2>Data de Criação: {{auction.formatedCreationDate}}</h2>
-      <h2>Data de Expiração: {{auction.formatedEndDate}}</h2>
-      <h2>Quantidade de Lances: {{auction.numberOfBids}}</h2>
-    </ion-card-content>
-
-    <ion-item-group>
+  <!-- FIANCE -->
+  <div *ngIf="userType == 0">
+      <ion-toolbar>
+          <ion-segment [(ngModel)]="bidType" (ionChange)="filterBid()" color="primary">
+              <ion-segment-button value="ALL">
+                  TODOS
+              </ion-segment-button>
+              <ion-segment-button value="CLOSED">
+                  ENCERRADOS
+              </ion-segment-button>
+              <ion-segment-button value="OPENED">
+                  EM ANDAMENTO
+              </ion-segment-button>
+          </ion-segment>
+      </ion-toolbar>
+  
+    <ion-card *ngFor="let auction of auctions; trackBy index;">
       <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
-        Lances
+        <ion-label text-left>EM ANDAMENTO</ion-label>
       </ion-item-divider>
       <ion-item-divider color="red" text-center *ngIf="!auction.isAuctionActive">
+        <ion-label text-left>ENCERRADO</ion-label>
+        <ion-label text-right></ion-label>  restantes
+      </ion-item-divider>
+  
+      <ion-card-content padding style="padding-top: 3%;">
+        <h2>Data de Criação: {{auction.formatedCreationDate}}</h2>
+        <h2>Data de Expiração: {{auction.formatedEndDate}}</h2>
+        <h2>Quantidade de Lances: {{auction.numberOfBids}}</h2>
+      </ion-card-content>
+  
+      <ion-item-group>
+        <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
           Lances
         </ion-item-divider>
-      <button ion-item>
-        Nenhum lance até o momento!
-      </button>
-      <hr>
-    </ion-item-group>
+        <ion-item-divider color="red" text-center *ngIf="!auction.isAuctionActive">
+            Lances
+          </ion-item-divider>
+        <button ion-item>
+          Nenhum lance até o momento!
+        </button>
+        <hr>
+      </ion-item-group>
+  
+      <ion-row>
+        <ion-col center text-center>
+          <ion-item>
+            <button *ngIf="auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.budgetId)" color="green" full>Ver Detalhes do Orçamento</button>
+            <button *ngIf="!auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.budgetId)" color="red" full>Ver Detalhes do Orçamento</button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+  
+    </ion-card>
 
-    <ion-row>
-      <ion-col center text-center>
-        <ion-item>
-          <button *ngIf="auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.budgetId)" color="green" full>Ver Detalhes do Orçamento</button>
-          <button *ngIf="!auction.isAuctionActive" ion-button (click)="showBudgetDetail(auction.budgetId)" color="red" full>Ver Detalhes do Orçamento</button>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+  </div>
 
-  </ion-card>
+
 
 </ion-content>

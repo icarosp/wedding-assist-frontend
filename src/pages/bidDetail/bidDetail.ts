@@ -7,9 +7,9 @@ import { Budget } from '../../models/budget.model';
 
 @Component({
   selector: 'page-bid',
-  templateUrl: 'bid.html'
+  templateUrl: 'bidDetail.html'
 })
-export class BidPage {
+export class BidDetail {
   waService: WAService;
   auctions: any;
   userType: any;
@@ -40,9 +40,9 @@ export class BidPage {
         this.doAlert("Erro", error.json().errors[0]);
       });
     } else {
-      let id = this.waService.GetFromDbWithKey("id");
+      let id = this.waService.GetFromDbWithKey("coupleId");
 
-      let url = this.waService.GetServiceUrl() + '/budget/get_budgets_by_provider/' + id;
+      let url = this.waService.GetServiceUrl() + '/api/budget/get_budgets_by_provider/' + id;
       this.http.get(url).subscribe(data => {
         console.log(data.json().data);
         this.auctions = data.json().data;
@@ -51,6 +51,8 @@ export class BidPage {
       });
     }
   }
+
+
 
   doAlert(title: string, message: string) {
     let alert = this.alertCtrl.create({
