@@ -78,10 +78,6 @@ export class BidDetail {
   }
 
   getServiceName(id: any) {
-    console.log("entrou em detalhe nome service");
-    console.log(id);
-
-
     switch (id) {
       case 2:
         return "Buffet";
@@ -97,9 +93,8 @@ export class BidDetail {
     });
     this.loader.present();
 
-
     let url = this.waService.GetServiceUrl() + '/bid/chooseBid/';
-    let body = JSON.stringify({ id: this.bid.id });
+    let body = JSON.stringify(this.bid.bidId);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
@@ -124,6 +119,16 @@ export class BidDetail {
       case 4:
         return "Mesa";
     }
+  }
+
+  showChooseButton(finished: boolean, editable: boolean){
+    console.log(finished);
+    console.log(editable);
+    console.log(finished && editable);
+
+    if(finished && !editable)
+      return true;
+    return false;
   }
 
   getItemName(id: any) {

@@ -55,7 +55,7 @@
     <ion-item-divider color="grey"></ion-item-divider>
     <ion-item>
       <button *ngIf="!editable" ion-button block outline large (click)="sendOffer()">Enviar Orçamento</button>
-      <button *ngIf="editable" ion-button block outline large (click)="chooseAsWinner()">Escolher Proposta Vencedora</button>
+      <button *ngIf="!showChooseButton(bid.isFinished,editable)" ion-button block outline large (click)="chooseAsWinner()">Escolher Proposta Vencedora</button>
       <button *ngIf="editable" ion-button block outline large (click)="backToBidPage()">Voltar</button>
       
     </ion-item>

@@ -69,6 +69,12 @@ export class BidPage {
     }
   }
 
+  getBidColor(winner: boolean){
+    if(winner)
+      return "primary";
+    return "white";
+  }
+
   doAlert(title: string, message: string) {
     let alert = this.alertCtrl.create({
       title: title,

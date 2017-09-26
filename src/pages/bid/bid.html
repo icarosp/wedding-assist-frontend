@@ -89,7 +89,8 @@
           <ion-icon name="logo-usd" item-start></ion-icon>{{getNumberOfBids(auction.bids)}} até o momento
           <ion-icon name="logo-usd" item-end></ion-icon>
         </ion-item-divider>
-        <button ion-item (click)="showBidDetail(bid.bidId)" *ngFor="let bid of auction.bids; trackBy index;" ion-item>
+        <button ion-item (click)="showBidDetail(bid.bidId)" *ngFor="let bid of auction.bids; trackBy index;" color="{{getBidColor(bid.isWinner)}}" ion-item>
+            <ion-badge color="green" text-center *ngIf="bid.isWinner">LANCE VENCEDOR</ion-badge>
           <ion-grid>
             <ion-row>
               <ion-col col-9>
@@ -109,13 +110,7 @@
           </ion-row>
           </ion-grid>
 
-          <ion-row>
-              <ion-col center text-center>
-                <ion-item>
-                    <ion-item-divider text-center color="{{getAuctionColor(auction.isAuctionActive)}}"><b>Ver detalhes do lance</b></ion-item-divider>
-                </ion-item>
-              </ion-col>
-            </ion-row>
+          <ion-item-divider text-center color="{{getAuctionColor(auction.isAuctionActive)}}"><b>Ver detalhes do lance</b></ion-item-divider>
 
           <div *ngIf="!lst">
               <hr>
