@@ -30,6 +30,7 @@ export class BidDetail {
   ionViewDidEnter() {
     this.bid = this.navParams.get("bid");
     this.editable = !this.navParams.get("editable");
+    
     console.log(this.bid);
   }
 

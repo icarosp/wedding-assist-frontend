@@ -40,11 +40,11 @@
           </ion-item>
           <ion-item>
             <ion-label>Valor</ion-label>
-            <ion-input type="number"[(ngModel)]="item.bidItemAmount" style="height: 50px;"></ion-input>
+            <ion-input type="number"[(ngModel)]="item.bidItemAmount" style="height: 50px;" [disabled]="editable"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Detalhes na Proposta</ion-label>
-            <ion-input [(ngModel)]="item.bidItemDescription" style="height: 50px;" type="text"></ion-input>
+            <ion-input [(ngModel)]="item.bidItemDescription" style="height: 50px;" type="text" [disabled]="editable"></ion-input>
           </ion-item>
           <ion-item-divider *ngIf="!last" color="grey"></ion-item-divider>
         </div>
@@ -55,7 +55,9 @@
     <ion-item-divider color="grey"></ion-item-divider>
     <ion-item>
       <button *ngIf="!editable" ion-button block outline large (click)="sendOffer()">Enviar Orçamento</button>
+      <button *ngIf="editable" ion-button block outline large (click)="chooseAsWinner()">Escolher Como Proposta Vencedora</button>
       <button *ngIf="editable" ion-button block outline large (click)="backToBidPage()">Voltar</button>
+      
     </ion-item>
   </ion-item-group>
 </ion-content>
