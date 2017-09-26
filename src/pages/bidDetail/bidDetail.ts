@@ -35,7 +35,7 @@ export class BidDetail {
     console.log(this.bid);
 
     this.bid["providerId"] = this.waService.GetFromDbWithKey("id");
-    this.bid["auctionId"] = 1;
+    this.bid["auctionId"] = this.bid.auctionId;
 
     let url = this.waService.GetServiceUrl()+'bid/save_bid';
     let body = JSON.stringify(this.bid);

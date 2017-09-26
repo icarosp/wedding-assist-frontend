@@ -49,7 +49,7 @@ export class BidPage {
     } else {
       let id = this.waService.GetFromDbWithKey("id");
 
-      let url = this.waService.GetServiceUrl() + '/budget/get_budgets_by_provider/' + id;
+      let url = 'http://prod-wa-back.us-east-1.elasticbeanstalk.com/api/budget/get_budgets_by_provider/'+ id;//this.waService.GetServiceUrl() + '/budget/get_budgets_by_provider/' + id;
       this.http.get(url).subscribe(data => {
         console.log(data.json().data);
         this.auctionsBeforeFilterProvider = this.auctionsProvider = data.json().data;
