@@ -89,7 +89,7 @@ export class BudgetPage {
     let category2: BudgetServiceCategory;
     category2 = new BudgetServiceCategory();
     category2.categoryName = "Bebidas";
-    category2.categoryIcon = "pizza";
+    category2.categoryIcon = "beer";
     category2.category = "1";
 
     //ITEM BEER
@@ -127,7 +127,7 @@ export class BudgetPage {
     let category3: BudgetServiceCategory;
     category3 = new BudgetServiceCategory();
     category3.categoryName = "Cadeira";
-    category3.categoryIcon = "pizza";
+    category3.categoryIcon = "grid";
     category3.category = "3";
 
     //ITEM CERIMONY CHAIR
@@ -150,7 +150,7 @@ export class BudgetPage {
     let category4: BudgetServiceCategory;
     category4 = new BudgetServiceCategory();
     category4.categoryName = "Mesa";
-    category4.categoryIcon = "pizza";
+    category4.categoryIcon = "ios-barcode";
     category4.category = "4";
 
     //ITEM PARTY TABLE
