@@ -4,7 +4,7 @@ import { WAService } from "../../providers/wa.service"
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { BudgetStepTwoPage } from '../budgetStepTwo/budgetStepTwo';
 import { Budget } from '../../models/budget.model';
-import {TabsPage} from '../tabs/tabs';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-bid',
@@ -26,7 +26,7 @@ export class BidDetail {
     this.waService = new WAService();
 
     //online till load the full page
-    this.bid = {services: []};
+    this.bid = { services: [] };
   }
 
   ionViewDidEnter() {
@@ -36,23 +36,31 @@ export class BidDetail {
     console.log(this.bid);
   }
 
-  sendOffer(){
+  sendOffer() {
     console.log(this.bid);
+
+    //LOADER
+    this.loader = this.loadingController.create({
+      content: "Carregando..."
+    });
+    this.loader.present();
 
     this.bid["providerId"] = this.waService.GetFromDbWithKey("id");
     this.bid["auctionId"] = this.bid.auctionId;
 
-    let url = this.waService.GetServiceUrl()+'/bid/save_bid';
+    let url = this.waService.GetServiceUrl() + '/bid/save_bid';
     let body = JSON.stringify(this.bid);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    
+
     this.http.post(url, body, options).subscribe(data => {
       console.log(data);
-            this.doAlert("Aviso","Dados salvos com sucesso!");
-            this.navCtrl.push(TabsPage);
+      this.doAlert("Aviso", "Dados salvos com sucesso!");
+      this.loader.dismiss();
+      this.navCtrl.push(TabsPage);
     }, error => {
-        this.doAlert("Erro",error.json().errors[0]);
+      this.loader.dismiss();
+      this.doAlert("Erro", error.json().errors[0]);
     });
 
 
@@ -82,14 +90,21 @@ export class BidDetail {
     }
   }
 
-  chooseAsWinner(){
-    let url = this.waService.GetServiceUrl() + '/big/chooseBid/';
-    let body = JSON.stringify({id: this.bid.id});
+  chooseAsWinner() {
+    //LOADER
+    this.loader = this.loadingController.create({
+      content: "Carregando..."
+    });
+    this.loader.present();
+
+
+    let url = this.waService.GetServiceUrl() + '/bid/chooseBid/';
+    let body = JSON.stringify({ id: this.bid.id });
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
     this.http.post(url, body, options).subscribe(data => {
-      this.doAlert("Aviso", "Dados salvos com sucesso!");
+      this.doAlert("Aviso", "Lance escolhido com sucesso!");
       this.loader.dismiss();
       this.navCtrl.push(TabsPage);
     }, error => {
