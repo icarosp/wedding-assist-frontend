@@ -1,57 +1,61 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>
-        Propostas
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>
+    <ion-title>
+      Propostas
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 
-  <ion-content>
-  
-    <div *ngFor="let service of bid.services; trackBy index;">
-      <ion-item-group>
-        <ion-item-divider *ngIf="!editable" color="light"><b>{{service.serviceName}}</b></ion-item-divider>
-        <ion-item-divider *ngIf="editable" color="light">{{getServiceName(service.serviceType)}}</ion-item-divider>
-  
-        <div *ngFor="let category of service.categories; trackBy index;">
-          <ion-item-divider *ngIf="!editable" color="grey">{{category.categoryName}}
-          </ion-item-divider>
-          <ion-item-divider *ngIf="editable" color="grey">{{getCategoryName(category.category)}}
-            </ion-item-divider>
-          <div *ngFor="let item of category.items; trackBy index; let last = last">
-            <ion-item>
-              <ion-label *ngIf="!editable">Qtd. de Pessoas - {{item.name}}</ion-label>
-              <ion-label *ngIf="editable">Qtd. de Pessoas - {{getItemName(item.type)}}</ion-label>
-              <ion-select [(ngModel)]="item.peopleQuantity" [disabled]="editable">
-                <ion-option value="10" selected="true">10</ion-option>
-                <ion-option value="20">20</ion-option>
-                <ion-option value="30">30</ion-option>
-                <ion-option value="40">40</ion-option>
-                <ion-option value="50">50</ion-option>
-                <ion-option value="60">60</ion-option>
-                <ion-option value="70">70</ion-option>
-                <ion-option value="80">80</ion-option>
-                <ion-option value="90">90</ion-option>
-                <ion-option value="100">100</ion-option>
-                <ion-option value="150">150</ion-option>
-                <ion-option value="200">200</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label>Descrição</ion-label>
-              <ion-input [(ngModel)]="item.description" style="height: 50px;" type="text" [disabled]="editable"></ion-input>
-            </ion-item>
-            <ion-item-divider *ngIf="!last" color="grey"></ion-item-divider>
-          </div>
-        </div>
-      </ion-item-group>
-    </div>
+<ion-content>
+
+  <div *ngFor="let service of bid.services; trackBy index;">
     <ion-item-group>
-      <ion-item-divider color="grey"></ion-item-divider>
-      <ion-item>
-        <button *ngIf="!editable" ion-button block outline large (click)="sendBudget(myDate)">Enviar Orçamento</button>
-        <button *ngIf="editable" ion-button block outline large (click)="backToBidPage()">Voltar</button>
-      </ion-item>
+      <ion-item-divider color="light">{{getServiceName(service.serviceType)}}</ion-item-divider>
+
+      <div *ngFor="let category of service.categories; trackBy index;">
+        <ion-item-divider color="grey">{{getCategoryName(category.category)}}
+        </ion-item-divider>
+        <div *ngFor="let item of category.items; trackBy index; let last = last">
+          <ion-item>
+            <ion-label>Qtd. de Pessoas - {{getItemName(item.type)}}</ion-label>
+            <ion-select [(ngModel)]="item.peopleQuantity" [disabled]="true">
+              <ion-option value="10" selected="true">10</ion-option>
+              <ion-option value="20">20</ion-option>
+              <ion-option value="30">30</ion-option>
+              <ion-option value="40">40</ion-option>
+              <ion-option value="50">50</ion-option>
+              <ion-option value="60">60</ion-option>
+              <ion-option value="70">70</ion-option>
+              <ion-option value="80">80</ion-option>
+              <ion-option value="90">90</ion-option>
+              <ion-option value="100">100</ion-option>
+              <ion-option value="150">150</ion-option>
+              <ion-option value="200">200</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Descrição</ion-label>
+            <ion-input [(ngModel)]="item.description" style="height: 50px;" type="text" [disabled]="true"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Valor</ion-label>
+            <ion-input type="number"[(ngModel)]="item.bidItemAmount" style="height: 50px;"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Detalhes na Proposta</ion-label>
+            <ion-input [(ngModel)]="item.bidItemDescription" style="height: 50px;" type="text"></ion-input>
+          </ion-item>
+          <ion-item-divider *ngIf="!last" color="grey"></ion-item-divider>
+        </div>
+      </div>
     </ion-item-group>
-  </ion-content>
+  </div>
+  <ion-item-group>
+    <ion-item-divider color="grey"></ion-item-divider>
+    <ion-item>
+      <button *ngIf="!editable" ion-button block outline large (click)="sendOffer()">Enviar Orçamento</button>
+      <button *ngIf="editable" ion-button block outline large (click)="backToBidPage()">Voltar</button>
+    </ion-item>
+  </ion-item-group>
+</ion-content>

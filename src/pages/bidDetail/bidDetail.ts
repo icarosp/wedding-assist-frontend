@@ -20,6 +20,7 @@ export class BidDetail {
     public http: Http,
     public navParams: NavParams,
     public alertCtrl: AlertController) {
+    this.waService = new WAService();
 
     this.bid = navParams.get("bid");
     this.editable = !navParams.get("editable");
@@ -28,6 +29,27 @@ export class BidDetail {
   }
 
   ionViewDidEnter() {
+  }
+
+  sendOffer(){
+    console.log(this.bid);
+
+    this.bid["providerId"] = this.waService.GetFromDbWithKey("id");
+    this.bid["auctionId"] = 1;
+
+    let url = this.waService.GetServiceUrl()+'bid/save_bid';
+    let body = JSON.stringify(this.bid);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    
+    this.http.post(url, body, options).subscribe(data => {
+      console.log(data);
+            this.doAlert("Aviso","Dados salvos com sucesso!");
+    }, error => {
+        this.doAlert("Erro",error.json().errors[0]);
+    });
+
+
   }
 
 

@@ -5,6 +5,7 @@ export class Budget {
     startDate: any;
     duration: any;
     services: Array<BudgetService>;
+    budgetId: number;
 
     constructor() {
         this.services = new Array<BudgetService>();
