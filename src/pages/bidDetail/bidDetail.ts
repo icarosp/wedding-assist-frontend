@@ -23,13 +23,14 @@ export class BidDetail {
     public alertCtrl: AlertController) {
     this.waService = new WAService();
 
-    this.bid = navParams.get("bid");
-    this.editable = !navParams.get("editable");
-
-    console.log(this.bid);
+    //online till load the full page
+    this.bid = {services: []};
   }
 
   ionViewDidEnter() {
+    this.bid = this.navParams.get("bid");
+    this.editable = !this.navParams.get("editable");
+    console.log(this.bid);
   }
 
   sendOffer(){
@@ -66,6 +67,10 @@ export class BidDetail {
   }
 
   getServiceName(id: any) {
+    console.log("entrou em detalhe nome service");
+    console.log(id);
+
+
     switch (id) {
       case 2:
         return "Buffet";

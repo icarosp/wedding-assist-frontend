@@ -115,6 +115,19 @@ export class BidPage {
     }
   }
 
+  showBidDetail(id: number){
+    let budget: Budget;
+    
+        let url = this.waService.GetServiceUrl() + '/bid/get_bid/' + id;
+        this.http.get(url).subscribe(data => {
+          budget = data.json().data;
+          console.log(budget);
+          this.navCtrl.push(BidDetail, { bid: budget, editable: false });
+        }, error => {
+          this.doAlert("Erro", error.json().errors[0]);
+        });
+  }
+
   getNumberOfBids(bids: any) {
     if (bids.length === 0)
       return "Nenhum lance"

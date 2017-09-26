@@ -86,10 +86,10 @@
 
       <ion-item-group>
         <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
-          <ion-icon name="logo-usd" item-end></ion-icon>{{auction.bids.lenght}} Lances até o momento
+          <ion-icon name="logo-usd" item-start></ion-icon>{{getNumberOfBids(auction.bids)}} até o momento
           <ion-icon name="logo-usd" item-end></ion-icon>
         </ion-item-divider>
-        <button ion-item *ngFor="let bid of auction.bids; trackBy index;" ion-item>
+        <button ion-item (click)="showBidDetail(bid.bidId)" *ngFor="let bid of auction.bids; trackBy index;" ion-item>
           <ion-grid>
             <ion-row>
               <ion-col col-9>
