@@ -125,4 +125,13 @@ export class BidPage {
     else
       return bids.length + " lances"
   }
+
+  getAuctionColor(active: boolean) {
+    console.log("não");
+
+    if (active)
+      return "green";
+    else
+      return "red";
+  }
 }

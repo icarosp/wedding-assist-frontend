@@ -24,7 +24,7 @@
       </ion-segment>
     </ion-toolbar>
 
-    <ion-card *ngFor="let auction of auctionsProvider; trackBy index;">
+    <ion-card *ngFor="let auction of auctionsProvider; trackBy index;" style="margin-top: 3%;">
       <ion-item-divider color="green" text-center *ngIf="auction.isAuctionActive">
         <ion-label text-left>EM ANDAMENTO</ion-label>
       </ion-item-divider>
@@ -81,7 +81,7 @@
       <ion-card-content padding style="padding-top: 3%;">
         <h2>Data de Criação: {{auction.formatedCreationDate}}</h2>
         <h2>Data de Expiração: {{auction.formatedEndDate}}</h2>
-        <h2>Quantidade de Lances: {{auction.numberOfBids}}</h2>
+        <h2>Quantidade de Lances: {{getNumberOfBids(auction.bids)}}</h2>
       </ion-card-content>
 
       <ion-item-group>
@@ -89,30 +89,36 @@
           <ion-icon name="logo-usd" item-end></ion-icon>{{auction.bids.lenght}} Lances até o momento
           <ion-icon name="logo-usd" item-end></ion-icon>
         </ion-item-divider>
-        <ion-item-divider color="red" text-center *ngIf="!auction.isAuctionActive">
-          {{getNumberOfBids(auction.bids)}} até o momento
-          <ion-icon name="logo-usd" item-end></ion-icon>
-          <ion-icon name="logo-usd" item-start></ion-icon>
-        </ion-item-divider>
         <button ion-item *ngFor="let bid of auction.bids; trackBy index;" ion-item>
           <ion-grid>
             <ion-row>
-              <ion-col col-8>
-                  {{bid.providerName}}
+              <ion-col col-9>
+                  {{bid.formatedBidTime}}
               </ion-col>
-              <ion-col col-4>
-                  <ion-badge text-top color="primary" item-top item-right>{{bid.position}}</ion-badge>
+              <ion-col col-3>
+                  <ion-badge text-top color="{{getAuctionColor(auction.isAuctionActive)}}" item-top item-right>{{bid.position}} º</ion-badge>
               </ion-col>
             </ion-row>
           <ion-row>
-              <ion-col col-8>
-                  {{bid.formatedBidTime}}
+              <ion-col col-9>
+                  {{bid.providerName}}
               </ion-col>
-              <ion-col col-4>
-                  <ion-badge text-top color="primary" item-top item-right>{{bid.formatedAmount}}</ion-badge>
+              <ion-col col-3 style="margin-top: 0% !important;">
+                  <ion-badge text-top color="{{getAuctionColor(auction.isAuctionActive)}}" item-top item-right>{{bid.formatedAmount}}</ion-badge>
               </ion-col>
           </ion-row>
           </ion-grid>
+
+          <ion-row>
+              <ion-col center text-center>
+                <ion-item>
+                    <ion-item-divider text-center color="{{getAuctionColor(auction.isAuctionActive)}}"><b>Ver detalhes do lance</b></ion-item-divider>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+          
+          <br>
           <hr>
         </button>
         <hr>
